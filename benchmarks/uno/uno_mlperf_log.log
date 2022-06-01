@@ -1,0 +1,18 @@
+:::MLLOG {"namespace": "", "time_ms": 1647023072403, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "UNO", "metadata": {"file": "uno_mllog.py", "lineno": 519}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072404, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 520}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072404, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 521}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072405, "event_type": "POINT_IN_TIME", "key": "number_of_ranks", "value": "1", "metadata": {"file": "uno_mllog.py", "lineno": 525}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072405, "event_type": "POINT_IN_TIME", "key": "number_of_nodes", "value": "1", "metadata": {"file": "uno_mllog.py", "lineno": 526}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072405, "event_type": "POINT_IN_TIME", "key": "accelerators_per_node", "value": "8", "metadata": {"file": "uno_mllog.py", "lineno": 527}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072405, "event_type": "INTERVAL_END", "key": "init_stop", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 529}}
+:::MLLOG {"namespace": "", "time_ms": 1647023072410, "event_type": "INTERVAL_START", "key": "run_start", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 531}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397736, "event_type": "POINT_IN_TIME", "key": "submission_benchmark", "value": "UNO", "metadata": {"file": "uno_mllog.py", "lineno": 519}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397737, "event_type": "POINT_IN_TIME", "key": "cache_clear", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 520}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397737, "event_type": "INTERVAL_START", "key": "init_start", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 521}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397737, "event_type": "POINT_IN_TIME", "key": "number_of_ranks", "value": "1", "metadata": {"file": "uno_mllog.py", "lineno": 525}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397738, "event_type": "POINT_IN_TIME", "key": "number_of_nodes", "value": "1", "metadata": {"file": "uno_mllog.py", "lineno": 526}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397738, "event_type": "POINT_IN_TIME", "key": "accelerators_per_node", "value": "8", "metadata": {"file": "uno_mllog.py", "lineno": 527}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397738, "event_type": "INTERVAL_END", "key": "init_stop", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 529}}
+:::MLLOG {"namespace": "", "time_ms": 1647024397743, "event_type": "INTERVAL_START", "key": "run_start", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 531}}
+:::MLLOG {"namespace": "", "time_ms": 1647024661595, "event_type": "INTERVAL_END", "key": "epoch_stop", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 95, "epoch_num": 1}}
+:::MLLOG {"namespace": "", "time_ms": 1647024665116, "event_type": "INTERVAL_END", "key": "run_stop", "value": null, "metadata": {"file": "uno_mllog.py", "lineno": 500, "status": "success"}}
