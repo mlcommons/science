@@ -1,0 +1,22 @@
+#-e .
+cloudmesh-common
+cloudmesh-gpu
+#horovod
+jupyter
+keras
+matplotlib
+numpy
+pandas
+psutil
+scipy
+tabulate
+tensorflow
+tensorflow_datasets
+tqdm
+wheel
+jupyterlab
+ipywidgets
+jupyter-autotime
+ipython-autotime
+papermill
+git+https://github.com/mlperf/logging.git@1.0.0
