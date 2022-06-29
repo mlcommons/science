@@ -1,0 +1,75 @@
+name: earthquake-shm
+mode: h
+dir: shm 
+experiments:
+  card_name: "a100,v100,p100,k80,rtx2080"
+  gpu_count: 1
+  cpu_num: 6
+  mem: "64GB"
+
+  ## TFTTransformerepochs = num_epochs
+  #
+  TFTTransformerepochs: "2,10,20,30,34,40,50,60,70"
+
+attributes:
+  script: FFFFWNPFEARTHQ_newTFTv29-gregor-parameters-fig.ipynb
+  revision: latest
+  user:
+     account: ds6011-sp22-002
+  # user.account: ds6011-sp22-002
+  run:
+    workdir: /dev/shm/mlcommons-tmp
+    venvpath: /project/bii_dsc/users
+    resourcedir: /project/bii_dsc/mlcommons-system
+    datadir: data
+    branch: 'main'
+
+  system:
+    python: "3.10.2"
+    num_cpus: 6
+    partition: "gpu"
+    host: "rivanna"
+
+  time: "3-0"
+  set_soft_device_placement: False
+  debugging_set_log_device_placement: False
+  DLAnalysisOnly: False
+  DLRestorefromcheckpoint: False
+  DLinputCheckpointpostfix: ''
+
+  ## TFTTransformerbatch_size = minibatch_size : basically split training data into batches used to calculate model error and update model coefficients
+  ## links for more info: https://machinelearningmastery.com/gentle-introduction-mini-batch-gradient-descent-configure-batch-size/
+  ## https://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network
+  #
+  ## TFTTransformertestvalbatch_size = max(128,TFTTransformerbatch_size) #maxibatch_size : explain in minibatch_size, basically this is a range between min and max for batch size
+  TFTTransformerbatch_size: 64
+
+  ## TFTd_model = hidden_layer_size : number of hidden layers in model
+  TFTd_model: 160
+
+  ## Tseq = num_encoder_steps : size of sequence window, number of days included in that section of data. This is used throughout a large portion of the code.
+  Tseq: 26
+
+  ## TFTdropout_rate = dropout_rate : the dropout rate when training models. Basically randomly drop nodes from a neural network to prevent overfitting
+  ## link for more info: https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/
+  TFTdropout_rate: 0.1
+
+  ## learning_rate : how quickly the model adapts to the problem, larger means faster convergence but less optimal solutions,
+  ## slower means slower convergence but more optimal solutions potentially fail if learning rate it too small.
+  ## in general a variable learning rate is best. start larger and decrease as you see less returns or as your solution converges.
+  ## https://machinelearningmastery.com/understand-the-dynamics-of-learning-rate-on-deep-learning-neural-networks/
+  learning_rate: 0.0000005
+
+  ## max_gradient_norm : Gradient Clipping? , I don't think this param is used in code
+  ## https://machinelearningmastery.com/how-to-avoid-exploding-gradients-in-neural-networks-with-gradient-clipping/
+  max_gradient_norm: 0.01
+
+  ## early_stopping_patience : Early stopping param for keras, a way to prevent overfit or various metric decreases
+  ## https://machinelearningmastery.com/how-to-stop-training-deep-neural-networks-at-the-right-time-using-early-stopping/
+  early_stopping_patience: 60
+
+  ## TFTnum_AttentionLayers = num_stacks | stack_size : number of layers in attention head? , Not sure if used in code.
+  TFTnum_AttentionLayers: 2
+
+  ## TFTnum_heads = num_heads : number of attention heads?
+  TFTnum_heads: 4

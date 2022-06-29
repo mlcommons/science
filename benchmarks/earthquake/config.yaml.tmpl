@@ -1,0 +1,91 @@
+# Example YAML file (Manual Run)
+
+# Directory configuration
+## for these properties, you will need to setup a workspace structure as follows:
+## {run.workdir} / $(whoami) / workspace-{meta.uuid}
+## so given the following parameters
+##
+## > meta.uuid: 0
+## > run.workdir: workspace
+## > run.datadir: data
+##
+## Running as username "demo", you will need to place the output of the data
+## repository at
+##
+## ./workspace/demo/workspace-0/data/...
+
+meta.uuid: 0
+run.workdir: workspace
+run.datadir: data
+
+# Host configuration
+## This switches the optimizations for the notebook
+## One of the following: generic, rivanna, dgxstation, ubuntu, summit
+system.host: generic
+
+# Hyperparameters
+
+## There are several hyperparameters in this dataset that can be
+## configured in this file.  You can find most of the configurations
+## and their explination below
+
+## Configures the overall Neural Network batch size when running the TFT model.
+## Sets the number of training samples in one forward/backward pass when learning
+## the model.
+TFTTransformerbatch_size: 64
+
+
+## Sets the number of hidden layers in the model.
+TFTd_model: 160
+
+## Establishes the window size used when learning the model.
+## Identifies the number of days to include
+Tseq: 26
+
+## Sets the rate in which data is dropped from the model to prevent overfitting.
+TFTdropout_rate: 0.1
+
+## Sets the learning rate to be applied when running the neural network optimization.
+learning_rate: 5.0e-07
+
+## Sets the level of clipping to be performed when descending through the gradient.
+max_gradient_norm: 0.01
+
+## Sets the patience amount when determing when to stop learning a model that's no longer
+## decreasing its loss.
+early_stopping_patience: 60
+
+## Sets the number of layers within the attention headers
+TFTnum_AttentionLayers: 2
+
+## Sets the number of heads to include in the TFT model
+TFTnum_heads: 4
+
+## Sets the total number of epochs to run against the model.
+TFTTransformerepochs: '2'
+
+
+# Execution Configurables
+
+## Configures tf.config.set_soft_device_placement; if set to true,
+## allow for CPU training
+set_soft_device_placement: false
+
+## Configures tf.debugging.set_log_device_placement; if set to true,
+## enables debug logging when calling tf.function
+debugging_set_log_device_placement: false
+
+## A runtime configuration that only performs analysis, and skips training
+## Only set this to true if you have a previously executed model still in memory
+DLAnalysisOnly: false
+
+## A runtime configuration that reuses a prior checkpoint in the batch processing
+## Set this to true if your prior runs were interrupted and you wish to resume where
+## the model has left off.
+DLRestorefromcheckpoint: false
+
+## A runtime configuration that appends a string to the folder containing checkpoint
+## files.  Set this value if you plan on investigating the differences between
+## checkpoints without rerunning the whole model.
+## This is useful when combined with the eariler execution configurations.
+DLinputCheckpointpostfix: ''

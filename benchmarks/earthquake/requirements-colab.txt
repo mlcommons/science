@@ -1,0 +1,18 @@
+#-e .
+cloudmesh-common>=4.3.83
+gputil>=1.4.0,<1.5.0
+keras>=2.6.0,<2.7.0
+matplotlib>=3.5.1,<3.6.0
+# Have to downgrade to 1.19.2 as pypi verison of
+# tensorflow at 2.6.0 depends on 1.19.2.
+numpy>=1.19.2,<1.22.0
+pandas>=1.3.5,<1.4.0
+psutil>=5.8.0,<5.9.0
+py-cpuinfo>=8.0.0,<8.1.0
+scipy>=1.7.3,<1.8.0
+tabulate>=0.8.9,<0.9.0
+tensorflow>=2.6.0,<2.7.0
+tensorflow_datasets>=4.0.1
+tqdm>=4.62.3,<4.63.0
+watermark>=2.3.0,<2.4.0
+wheel ; sys_platform == 'win32'
