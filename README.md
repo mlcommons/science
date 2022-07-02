@@ -1,5 +1,5 @@
 # MlCommons Science
 
-test pull request
+Please Look into the benchmrak folder for individual descriptions of the benchmarks
 
-* gregor was here
+A summary information will be published here shortly
