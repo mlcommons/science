@@ -9,7 +9,7 @@
 * https://github.com/laszewsk/mlcommons/edit/main/www/content/en/docs/science_policy.adoc
 
 :sectnums:
-
+-v0.5
 
 Version 0.5
 August 1, 2022
