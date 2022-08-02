@@ -20,6 +20,7 @@ Points of contact:
 * Tony Hey (Tony.Hey@stfc.ac.uk)
 * Gregor von Laszewski(laszewski@gmail.com)
 * Juri Papay (juripapay@hotmail.com)
+* Jeyan Thiyagalingam (t.jeyan@stfc.ac.uk)
 
 == Disclaimer
 
