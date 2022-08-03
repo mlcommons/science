@@ -21,7 +21,7 @@ The following descriptions and code to scientific benchmarks are avialable at:
 
 ## Deveopment versions 
 
-Development versions f the codes prior to upload t the mlcommons directory are avalable as follows:
+Development versions of the codes prior to upload to the mlcommons directory are avalable as follows:
 
 * [Science Policy Document](https://github.com/laszewsk/mlcommons/blob/main/www/content/en/docs/policy.adoc)
 * [Benchmarks](https://github.com/laszewsk/mlcommons/tree/main/benchmarks)
