@@ -21,24 +21,31 @@ predict cancer recurrence in patients based on patient related data.
 
 Uno application from Pilot1 (P1): The goal of Uno is to predict tumor
 response to single and paired drugs, based on molecular features of
-tumor cells across multiple data sources. It aims to accelerate the science goal of effective drugs can be developed to cure the tumor cells. 
+tumor cells across multiple data sources. It aims to accelerate the 
+science goal of effective drugs can be developed to cure the tumor cells. 
 
 ## Data description
 
 Combined dose response data contains sources: CCLE, CTRP, gCSI,
 GDSC, NCI60, SCL, SCLC, ALMANAC.FG, ALMANAC.FF, and ALMANAC.1A.
-For this benchmark, we used the AUC configuration of Uno that utilizes a single data source, CCLE. 
+For this benchmark, we used the AUC configuration of Uno that 
+utilizes a single data source, CCLE. 
 
 ## Steps to run
 
-A static dataset is prebuilt and available at http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5.
-``` $ wget http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5 ```
+A static dataset is prebuilt and available 
+[here](http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5)
+
+```bash
+$ wget http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5
+````
 
 The training can be initiated with the following command:
-```
-python uno_baseline_keras2.py --config_file uno_auc_model.txt \
-  --use_exported_data top_21_auc_1fold.uno.h5 --es True
+
+```bash
+python uno_baseline_keras2.py --config_file uno_auc_model.txt --use_exported_data top_21_auc_1fold.uno.h5 --es True
 ```
 
-Link to the original instructions is available [here](https://github.com/ECP-CANDLE/Benchmarks/tree/develop/Pilot1/Uno
-and https://github.com/ECP-CANDLE/Benchmarks/blob/develop/Pilot1/Uno/README.AUC.md)
+Link to the original instructions is available 
+[here](https://github.com/ECP-CANDLE/Benchmarks/tree/develop/Pilot1/Uno)
+and [here](https://github.com/ECP-CANDLE/Benchmarks/blob/develop/Pilot1/Uno/README.AUC.md)

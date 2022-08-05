@@ -10,7 +10,7 @@ The working group github is located at
 
 The Policy document is located at 
 
-* <https://github.com/mlcommons/science/policy.adoc>
+* <https://github.com/mlcommons/science/blob/main/policy.adoc>
 
 The following descriptions and code to scientific benchmarks are avialable at:
 
