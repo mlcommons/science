@@ -40,7 +40,7 @@ benchmark
 * Geoffrey C. Fox
 * Gregor von Laszewski
 * Robert Knuuti
-* Thomas Buttler
+* Thomas Butler
 * Jake Kolesar
 
 A paper about the firs results are published at
