@@ -24,8 +24,8 @@ import candle
 import uno_data
 from uno_data import CombinedDataLoader, CombinedDataGenerator, DataFeeder
 
-
 from mlperf_logging import mllog
+
 mlperf_logfile = "/lus/theta-fs0/projects/datascience/memani/uno-mllog/Benchmarks/Pilot1/Uno/mlperf.log"
 mllog.config(filename=mlperf_logfile)
 mllogger = mllog.get_mllogger()
@@ -63,10 +63,10 @@ def extension_from_parameters(args):
             ext += '.D{}={}'.format(i + 1, n)
         ext += '.ng'
     for i, n in enumerate(args.dense):
-    if args.dense_feature_layers != args.dense:
-        for i, n in enumerate(args.dense):
-            if n > 0:
-                ext += '.FD{}={}'.format(i + 1, n)
+        if args.dense_feature_layers != args.dense:
+            for i, n in enumerate(args.dense):
+                if n > 0:
+                    ext += '.FD{}={}'.format(i + 1, n)
 
     return ext
 
@@ -91,8 +91,7 @@ class LoggingCallback(Callback):
         self.print_fcn = print_fcn
 
     def on_epoch_end(self, epoch, logs={}):
-        
-        mllogger.end(key=mllog.constants.EPOCH_STOP,metadata={'epoch_num': epoch + 1})
+        mllogger.end(key=mllog.constants.EPOCH_STOP, metadata={'epoch_num': epoch + 1})
 
         msg = "[Epoch: %i] %s" % (epoch, ", ".join("%s: %f" % (k, v) for k, v in sorted(logs.items())))
         self.print_fcn(msg)
@@ -218,10 +217,10 @@ def build_model(loader, args, permanent_dropout=True, silent=False):
 
 
 def initialize_parameters(default_model='uno_default_model.txt'):
-
     # Build benchmark object
     unoBmk = benchmark.BenchmarkUno(benchmark.file_path, default_model, 'keras',
-                                    prog='uno_baseline', desc='Build neural network based models to predict tumor response to single and paired drugs.')
+                                    prog='uno_baseline',
+                                    desc='Build neural network based models to predict tumor response to single and paired drugs.')
 
     # Initialize parameters
     gParameters = candle.finalize_parameters(unoBmk)
@@ -274,14 +273,27 @@ def run(params):
 
     if args.export_csv:
         fname = args.export_csv
-        loader.partition_data(cv_folds=args.cv, train_split=train_split, val_split=val_split,
-                              cell_types=args.cell_types, by_cell=args.by_cell, by_drug=args.by_drug,
-                              cell_subset_path=args.cell_subset_path, drug_subset_path=args.drug_subset_path)
-        train_gen = CombinedDataGenerator(loader, batch_size=args.batch_size, shuffle=args.shuffle)
-        val_gen = CombinedDataGenerator(loader, partition='val', batch_size=args.batch_size, shuffle=args.shuffle)
+        loader.partition_data(cv_folds=args.cv,
+                              train_split=train_split,
+                              val_split=val_split,
+                              cell_types=args.cell_types,
+                              by_cell=args.by_cell, by_drug=args.by_drug,
+                              cell_subset_path=args.cell_subset_path,
+                              drug_subset_path=args.drug_subset_path)
+        train_gen = CombinedDataGenerator(loader,
+                                          batch_size=args.batch_size,
+                                          shuffle=args.shuffle)
+        val_gen = CombinedDataGenerator(loader,
+                                        partition='val',
+                                        batch_size=args.batch_size,
+                                        shuffle=args.shuffle)
 
-        x_train_list, y_train = train_gen.get_slice(size=train_gen.size, dataframe=True, single=args.single)
-        x_val_list, y_val = val_gen.get_slice(size=val_gen.size, dataframe=True, single=args.single)
+        x_train_list, y_train = train_gen.get_slice(size=train_gen.size,
+                                                    dataframe=True,
+                                                    single=args.single)
+        x_val_list, y_val = val_gen.get_slice(size=val_gen.size,
+                                              dataframe=True,
+                                              single=args.single)
         df_train = pd.concat([y_train] + x_train_list, axis=1)
         df_val = pd.concat([y_val] + x_val_list, axis=1)
         df = pd.concat([df_train, df_val]).reset_index(drop=True)
@@ -292,11 +304,21 @@ def run(params):
 
     if args.export_data:
         fname = args.export_data
-        loader.partition_data(cv_folds=args.cv, train_split=train_split, val_split=val_split,
-                              cell_types=args.cell_types, by_cell=args.by_cell, by_drug=args.by_drug,
-                              cell_subset_path=args.cell_subset_path, drug_subset_path=args.drug_subset_path)
-        train_gen = CombinedDataGenerator(loader, batch_size=args.batch_size, shuffle=args.shuffle)
-        val_gen = CombinedDataGenerator(loader, partition='val', batch_size=args.batch_size, shuffle=args.shuffle)
+        loader.partition_data(cv_folds=args.cv,
+                              train_split=train_split,
+                              val_split=val_split,
+                              cell_types=args.cell_types,
+                              by_cell=args.by_cell,
+                              by_drug=args.by_drug,
+                              cell_subset_path=args.cell_subset_path,
+                              drug_subset_path=args.drug_subset_path)
+        train_gen = CombinedDataGenerator(loader,
+                                          batch_size=args.batch_size,
+                                          shuffle=args.shuffle)
+        val_gen = CombinedDataGenerator(loader,
+                                        partition='val',
+                                        batch_size=args.batch_size,
+                                        shuffle=args.shuffle)
         store = pd.HDFStore(fname, complevel=9, complib='blosc:snappy')
 
         config_min_itemsize = {'Sample': 30, 'Drug1': 10}
@@ -310,7 +332,8 @@ def run(params):
 
                 for j, input_feature in enumerate(x_list):
                     input_feature.columns = [''] * len(input_feature.columns)
-                    store.append('x_{}_{}'.format(partition, j), input_feature.astype('float32'), format='table', data_columns=True)
+                    store.append('x_{}_{}'.format(partition, j), input_feature.astype('float32'), format='table',
+                                 data_columns=True)
                 store.append('y_{}'.format(partition), y.astype({target: 'float32'}), format='table', data_columns=True,
                              min_itemsize=config_min_itemsize)
                 logger.info('Generating {} dataset. {} / {}'.format(partition, i, gen.steps))
@@ -325,9 +348,14 @@ def run(params):
         return
 
     if args.use_exported_data is None:
-        loader.partition_data(cv_folds=args.cv, train_split=train_split, val_split=val_split,
-                              cell_types=args.cell_types, by_cell=args.by_cell, by_drug=args.by_drug,
-                              cell_subset_path=args.cell_subset_path, drug_subset_path=args.drug_subset_path)
+        loader.partition_data(cv_folds=args.cv,
+                              train_split=train_split,
+                              val_split=val_split,
+                              cell_types=args.cell_types,
+                              by_cell=args.by_cell,
+                              by_drug=args.by_drug,
+                              cell_subset_path=args.cell_subset_path,
+                              drug_subset_path=args.drug_subset_path)
 
     model = build_model(loader, args)
     logger.info('Combined model:')
@@ -405,20 +433,50 @@ def run(params):
             callbacks.append(MultiGPUCheckpoint(args.save_weights))
 
         if args.use_exported_data is not None:
-            train_gen = DataFeeder(filename=args.use_exported_data, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single, agg_dose=args.agg_dose, on_memory=args.on_memory_loader)
-            val_gen = DataFeeder(partition='val', filename=args.use_exported_data, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single, agg_dose=args.agg_dose, on_memory=args.on_memory_loader)
-            test_gen = DataFeeder(partition='test', filename=args.use_exported_data, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single, agg_dose=args.agg_dose, on_memory=args.on_memory_loader)
+            train_gen = DataFeeder(filename=args.use_exported_data,
+                                   batch_size=args.batch_size,
+                                   shuffle=args.shuffle,
+                                   single=args.single,
+                                   agg_dose=args.agg_dose,
+                                   on_memory=args.on_memory_loader)
+            val_gen = DataFeeder(partition='val',
+                                 filename=args.use_exported_data,
+                                 batch_size=args.batch_size,
+                                 shuffle=args.shuffle,
+                                 single=args.single,
+                                 agg_dose=args.agg_dose,
+                                 on_memory=args.on_memory_loader)
+            test_gen = DataFeeder(partition='test',
+                                  filename=args.use_exported_data,
+                                  batch_size=args.batch_size,
+                                  shuffle=args.shuffle,
+                                  single=args.single,
+                                  agg_dose=args.agg_dose,
+                                  on_memory=args.on_memory_loader)
         else:
-            train_gen = CombinedDataGenerator(loader, fold=fold, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single)
-            val_gen = CombinedDataGenerator(loader, partition='val', fold=fold, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single)
-            test_gen = CombinedDataGenerator(loader, partition='test', fold=fold, batch_size=args.batch_size, shuffle=args.shuffle, single=args.single)
+            train_gen = CombinedDataGenerator(loader,
+                                              fold=fold,
+                                              batch_size=args.batch_size,
+                                              shuffle=args.shuffle,
+                                              single=args.single)
+            val_gen = CombinedDataGenerator(loader,
+                                            partition='val',
+                                            fold=fold,
+                                            batch_size=args.batch_size,
+                                            shuffle=args.shuffle,
+                                            single=args.single)
+            test_gen = CombinedDataGenerator(loader,
+                                             partition='test',
+                                             fold=fold,
+                                             batch_size=args.batch_size,
+                                             shuffle=args.shuffle,
+                                             single=args.single)
 
         df_val = val_gen.get_response(copy=True)
         y_val = df_val[target].values
         y_shuf = np.random.permutation(y_val)
         log_evaluation(evaluate_prediction(y_val, y_shuf), logger,
                        description='Between random pairs in y_val:')
-
 
         if args.no_gen:
             x_train_list, y_train = train_gen.get_slice(size=train_gen.size, single=args.single)
@@ -429,7 +487,8 @@ def run(params):
                                 callbacks=callbacks,
                                 validation_data=(x_val_list, y_val))
         else:
-            logger.info('Data points per epoch: train = %d, val = %d, test = %d', train_gen.size, val_gen.size, test_gen.size)
+            logger.info('Data points per epoch: train = %d, val = %d, test = %d', train_gen.size, val_gen.size,
+                        test_gen.size)
             logger.info('Steps per epoch: train = %d, val = %d, test = %d', train_gen.steps, val_gen.steps, test_gen.steps)
             history = model.fit(train_gen,
                                 epochs=args.epochs,
@@ -508,28 +567,26 @@ def run(params):
 
 
 def main():
-    
     params = initialize_parameters()
-    
+
     ## adding mllog
     mlperf_logfile = "/lus/theta-fs0/projects/datascience/memani/uno-mllog/Benchmarks/Pilot1/Uno/mlperf.log"
-        #os.path.join(
-        #    self.config["cmd"]["results_dir"], "mlperf.log"
-        #)
+    # os.path.join(
+    #    self.config["cmd"]["results_dir"], "mlperf.log"
+    # )
     mllogger.event(key=mllog.constants.SUBMISSION_BENCHMARK, value="UNO")
     mllogger.event(key=mllog.constants.CACHE_CLEAR)
     mllogger.start(key=mllog.constants.INIT_START)
 
     # Scale logging for mlperf hpc metrics
     # using constants as uno does not use distributed implementation
-    mllogger.event(key='number_of_ranks', value='1') #value=dist.size)
-    mllogger.event(key='number_of_nodes', value='1') #value=(dist.size//dist.local_size))
-    mllogger.event(key='accelerators_per_node', value='8') #value=dist.local_size)
+    mllogger.event(key='number_of_ranks', value='1')  # value=dist.size)
+    mllogger.event(key='number_of_nodes', value='1')  # value=(dist.size//dist.local_size))
+    mllogger.event(key='accelerators_per_node', value='8')  # value=dist.local_size)
 
     mllogger.end(key=mllog.constants.INIT_STOP)
     params = initialize_parameters()
     mllogger.start(key=mllog.constants.RUN_START)
-
 
     run(params)
 

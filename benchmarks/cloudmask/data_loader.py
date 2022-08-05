@@ -16,11 +16,19 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from typing import Union, List
 
+
 # Convert images 1200x1500x9 to 256x256x9 to be used with U-net.
 class SLSTRDataLoader:
 
-    def __init__(self, args:dict, paths: Union[Path, List[Path]], shuffle: bool = True, batch_size: int = 32, single_image: bool = False, crop_size: int = 20, no_cache=False):
-      
+    def __init__(self,
+                 args: dict,
+                 paths: Union[Path, List[Path]],
+                 shuffle: bool = True,
+                 batch_size: int = 32,
+                 single_image: bool = False,
+                 crop_size: int = 20,
+                 no_cache=False):
+
         if isinstance(paths, Path):
             self._image_paths = Path(paths).glob('**/S3A*.hdf')
         else:
@@ -30,7 +38,7 @@ class SLSTRDataLoader:
         self._shuffle = shuffle if not single_image else False
         self.single_image = single_image
         self.patch_padding = 'valid' if not single_image else 'same'
-    
+
         # Parameters from cloudMaskConfig.yaml
         self.patch_size = args['PATCH_SIZE']
         self.n_channels = args['N_CHANNELS']
@@ -122,7 +130,7 @@ class SLSTRDataLoader:
         dataset = tf.data.Dataset.from_generator(self._load_data,
                                                  output_types=types,
                                                  output_shapes=shapes,
-                                                 args=(path, ))
+                                                 args=(path,))
         return dataset
 
     def to_dataset(self):
@@ -148,10 +156,11 @@ class SLSTRDataLoader:
         dataset = dataset.batch(self.batch_size, drop_remainder=True)
         return dataset
 
+
 # Dataloader specific to this benchmark
 def load_datasets(dataset_dir: Path, args: dict):
     data_paths = list(Path(dataset_dir).glob('**/S3A*.hdf'))
-    
+
     train_paths, test_paths = train_test_split(data_paths, train_size=args['train_split'], random_state=42)
 
     train_data_loader = SLSTRDataLoader(args, train_paths, batch_size=args['batch_size'], no_cache=args['no_cache'])

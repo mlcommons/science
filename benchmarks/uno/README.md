@@ -1,4 +1,5 @@
 # CANDLE UNO
+
 CANDLE (Exascale Deep Learning and Simulation Enabled Precision Medicine
 for Cancer) project  aims to implement deep learning architectures that
 are relevant to problems in cancer. These architectures address problems
@@ -29,6 +30,7 @@ GDSC, NCI60, SCL, SCLC, ALMANAC.FG, ALMANAC.FF, and ALMANAC.1A.
 For this benchmark, we used the AUC configuration of Uno that utilizes a single data source, CCLE. 
 
 ## Steps to run
+
 A static dataset is prebuilt and available at http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5.
 ``` $ wget http://ftp.mcs.anl.gov/pub/candle/public/benchmarks/Pilot1/uno/top_21_auc_1fold.uno.h5 ```
 
@@ -38,5 +40,5 @@ python uno_baseline_keras2.py --config_file uno_auc_model.txt \
   --use_exported_data top_21_auc_1fold.uno.h5 --es True
 ```
 
-Further instructions are available at https://github.com/ECP-CANDLE/Benchmarks/tree/develop/Pilot1/Uno
-and https://github.com/ECP-CANDLE/Benchmarks/blob/develop/Pilot1/Uno/README.AUC.md
+Link to the original instructions is available [here](https://github.com/ECP-CANDLE/Benchmarks/tree/develop/Pilot1/Uno
+and https://github.com/ECP-CANDLE/Benchmarks/blob/develop/Pilot1/Uno/README.AUC.md)
