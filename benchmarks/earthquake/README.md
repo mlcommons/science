@@ -1,5 +1,37 @@
 # MLCommons Science Earthquake benchmark
 
+## TEvolOp Earthquake Forecasting Model
+
+Time series are seen in many scientific problems and many of them are
+geospatial – functions of space and time and this benchmark
+illustrates this type. Some time series have a clear spatial structure
+that for example strongly relates nearby space points. The problem
+chosen is termed a spatial bag where there is spatial variation but it
+is not clearly linked to the geometric distance between spatial
+regions. In contrast, traffic-related time series have a strong
+spatial structure. We intend benchmarks that cover a broad range of
+problem types.
+
+The earthquake data comes from USGS and we have chosen a 4 degrees of
+Latitude (32 to 36 N) and 6 degrees of Longitude (-120 to -114) region
+covering Southern California. The data runs from 1950 to the present
+day and is presented as events: magnitude, ground location, depth, and
+time. We have divided the data into time and space bins. The time
+interval is daily but in our reference models, we accumulate this into
+fortnightly data. Southern California is divided into a 40 by 60 grid
+of 0.1 by 0.1-degree *pixels* which corresponds roughly to squares
+with an 11 km side, The dataset also includes an assignment of pixels
+to known faults and a list of the largest earthquakes in that region
+from 1950 until today. We have chosen various samplings of the dataset
+to provide both input and predicted values. These include time ranges
+from a fortnight up to 4 years. Further, we calculate summed
+magnitudes and depths and counts of significant quakes (magnitude >
+3.29). Other easily available quantities are powers of quake energy
+(using Energy ~ 101.5m where m is magnitude). Quantities are *Energy
+averaged* when there are multiple events in a single space-time bin
+except for simple event counts.
+
+
 ## Acknowledgements and References
 
 The following people were instrumental for the development of this
@@ -50,9 +82,6 @@ in the development github, so that we can test it on various platforms
 and computers.  If you have improvement suggestion, please get in
 contact with Gregor von Laszewski who coordinates the updates and to
 create appropriate branches.
-
-
-## Earthquake TFT Model
 
 
 ## Background

@@ -1,6 +1,8 @@
+# STEMDL(ORNL)
+
 This folder contains the original implementation of STEMDL developed at ORNL.
 
-## Software Requirements:
+## Software Requirements
 
 ### Classification Task
 

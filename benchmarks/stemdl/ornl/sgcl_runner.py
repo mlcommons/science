@@ -18,6 +18,7 @@ from torch.autograd import Variable
 import numpy as np
 from data_wrapper import SGCLDataLoader
 from model_wrapper import TorchModel
+
 # Training settings
 parser = argparse.ArgumentParser(description='STEMDL Benchmark',
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -71,6 +72,8 @@ parser.add_argument('--submission_status', default='onprem',
                     help='mlperf submission status')
 parser.add_argument('--submission_platform', default='Summit',
                     help='mlperf submission platform')
+
+
 def mixup(x, y, alpha=1.0, cuda=True):
     if alpha > 0:
         lam = np.random.beta(alpha, alpha)
@@ -87,7 +90,9 @@ def mixup(x, y, alpha=1.0, cuda=True):
     y_a, y_b = y, y[index]
     return mixed_x, y_a, y_b, lam
 
+
 criterion = nn.CrossEntropyLoss()
+
 
 def train(epoch):
     model.train()
@@ -100,7 +105,7 @@ def train(epoch):
               desc='Train Epoch     #{}'.format(epoch + 1),
               disable=not verbose) as t:
         for batch_idx, (data, target) in enumerate(train_loader):
-            #adjust_learning_rate(epoch, batch_idx)
+            # adjust_learning_rate(epoch, batch_idx)
             iteration += 1
 
             if args.cuda:
@@ -112,17 +117,17 @@ def train(epoch):
                 target_batch = target[i:i + args.batch_size]
                 if args.mixup:
                     data_batch, target_batch_a, target_batch_b, lam = mixup(data_batch, target_batch,
-                                                                        args.alpha, args.cuda)
+                                                                            args.alpha, args.cuda)
                     data_batch, target_batch_a, target_batch_b = map(Variable, (data_batch,
-                                                                 target_batch_a, target_batch_b))
+                                                                                target_batch_a, target_batch_b))
 
                     output = model(data_batch)
-                    train_accuracy.update(lam*accuracy(output, target_batch_a)
-                                     +(1-lam)*accuracy(output, target_batch_b))
-                    train_f1score.update(lam*f1score(output, target_batch_a)
-                                     +(1-lam)*f1score(output, target_batch_b))
+                    train_accuracy.update(lam * accuracy(output, target_batch_a)
+                                          + (1 - lam) * accuracy(output, target_batch_b))
+                    train_f1score.update(lam * f1score(output, target_batch_a)
+                                         + (1 - lam) * f1score(output, target_batch_b))
 
-                    loss = lam*criterion(output,target_batch_a) + (1-lam)*criterion(output,target_batch_b)
+                    loss = lam * criterion(output, target_batch_a) + (1 - lam) * criterion(output, target_batch_b)
                 else:
                     output = model(data_batch)
                     train_accuracy.update(accuracy(output, target_batch))
@@ -146,8 +151,8 @@ def train(epoch):
 
 
 def validate(epoch):
-    if hvd.rank() == 0 :
-        mllogger.start(key=mllog.constants.EVAL_START, metadata={"epoch_num": epoch+1})
+    if hvd.rank() == 0:
+        mllogger.start(key=mllog.constants.EVAL_START, metadata={"epoch_num": epoch + 1})
     model.eval()
     val_loss = Metric('val_loss')
     val_accuracy = Metric('val_accuracy')
@@ -160,9 +165,9 @@ def validate(epoch):
             for data, target in val_loader:
                 if args.cuda:
                     data, target = data.cuda(), target.cuda()
-                output_list = [model(torch.unsqueeze(data[:,idx,:,:],1)) for idx in [0,1,2]]
+                output_list = [model(torch.unsqueeze(data[:, idx, :, :], 1)) for idx in [0, 1, 2]]
                 output = torch.mean(torch.stack(output_list), dim=0)
-                
+
                 val_loss.update(F.cross_entropy(output, target))
                 val_accuracy.update(accuracy(output, target))
                 val_f1score.update(f1score(output, target))
@@ -171,9 +176,9 @@ def validate(epoch):
                                'f1_score': 100. * val_f1score.avg.item()})
                 t.update(1)
     if hvd.rank() == 0:
-         mllogger.event(key=mllog.constants.EVAL_ACCURACY, value=100*val_accuracy.avg.item(), clear_line=True)
-         mllogger.event(key="f1_score", value=100*val_f1score.avg.item(), clear_line=True)
-         mllogger.end(key=mllog.constants.EVAL_STOP, metadata={"epoch_num": epoch+1})
+        mllogger.event(key=mllog.constants.EVAL_ACCURACY, value=100 * val_accuracy.avg.item(), clear_line=True)
+        mllogger.event(key="f1_score", value=100 * val_f1score.avg.item(), clear_line=True)
+        mllogger.end(key=mllog.constants.EVAL_STOP, metadata={"epoch_num": epoch + 1})
     if log_writer:
         log_writer.add_scalar('val/loss', val_loss.avg, epoch)
         log_writer.add_scalar('val/accuracy', val_accuracy.avg, epoch)
@@ -205,10 +210,12 @@ def accuracy(output, target):
     pred = output.max(1, keepdim=True)[1]
     return pred.eq(target.view_as(pred)).cpu().float().mean()
 
-def f1score(output,target):
+
+def f1score(output, target):
     pred = output.max(1, keepdim=True)[1]
     f1 = f1_score(target.cpu(), pred.cpu(), average="macro")
     return torch.tensor(f1)
+
 
 def save_checkpoint(epoch):
     if hvd.rank() == 0:
@@ -276,11 +283,11 @@ if __name__ == '__main__':
 
     # Horovod: limit # of CPU threads to be used per worker.
     torch.set_num_threads(1)
-    
+
     kwargs = {'num_workers': 4, 'pin_memory': True} if args.cuda else {}
     kwargs['multiprocessing_context'] = 'forkserver'
     kwargs['allreduce_batch_size'] = allreduce_batch_size
-    train_data_wrapper = SGCLDataLoader(args.train_dir, shuffle=True, mode="train", **kwargs) 
+    train_data_wrapper = SGCLDataLoader(args.train_dir, shuffle=True, mode="train", **kwargs)
     val_data_wrapper = SGCLDataLoader(args.val_dir, shuffle=True, mode="val", **kwargs)
     train_loader = train_data_wrapper.loader
     train_sampler = train_data_wrapper.sampler
@@ -292,8 +299,8 @@ if __name__ == '__main__':
     model_wrapper = TorchModel(args.arch)
     model = model_wrapper.model
     print("Model: ", model)
-    #print(model.model)
-    
+    # print(model.model)
+
     if hvd.rank() == 0:
         mllogger.event(key=mllog.constants.CACHE_CLEAR)
         mllogger.event(key=mllog.constants.SUBMISSION_BENCHMARK, value="stemdl_classification")
@@ -305,13 +312,13 @@ if __name__ == '__main__':
         mllogger.start(key=mllog.constants.INIT_START)
         mllogger.event(key='number_of_ranks', value=hvd.size())
         mllogger.event(key=mllog.constants.SEED, value=args.seed)
-        mllogger.event(key=mllog.constants.GLOBAL_BATCH_SIZE, value=args.batch_size*hvd.size())
+        mllogger.event(key=mllog.constants.GLOBAL_BATCH_SIZE, value=args.batch_size * hvd.size())
         mllogger.event(key=mllog.constants.TRAIN_SAMPLES, value=len(train_dataset))
         mllogger.event(key=mllog.constants.EVAL_SAMPLES, value=len(val_dataset))
         mllogger.event(key=mllog.constants.OPT_NAME, value="AdamW")
         mllogger.event(key=mllog.constants.OPT_BASE_LR, value=args.base_lr)
         mllogger.end(key=mllog.constants.INIT_STOP)
-   
+
     # By default, Adasum doesn't need scaling up learning rate.
     # For sum/average with gradient Accumulation: scale learning rate by batches_per_allreduce
     lr_scaler = args.batches_per_allreduce * hvd.size() if not args.use_adasum else 1
@@ -324,10 +331,10 @@ if __name__ == '__main__':
             lr_scaler = args.batches_per_allreduce * hvd.local_size()
 
     # Horovod: scale learning rate by the number of GPUs.
-    optimizer = optim.AdamW(model_wrapper.params_to_update, #model.parameters(),
-                          lr=(args.base_lr *
-                              lr_scaler),
-                          weight_decay=args.wd)
+    optimizer = optim.AdamW(model_wrapper.params_to_update,  # model.parameters(),
+                            lr=(args.base_lr *
+                                lr_scaler),
+                            weight_decay=args.wd)
 
     # Horovod: (optional) compression algorithm.
     compression = hvd.Compression.fp16 if args.fp16_allreduce else hvd.Compression.none
@@ -350,17 +357,17 @@ if __name__ == '__main__':
     # Horovod: broadcast parameters & optimizer state.
     hvd.broadcast_parameters(model.state_dict(), root_rank=0)
     hvd.broadcast_optimizer_state(optimizer, root_rank=0)
-    #print(model)
+    # print(model)
     if hvd.rank() == 0:
         mllogger.start(key=mllog.constants.RUN_START)
-        mllogger.event(key=mllog.constants.GLOBAL_BATCH_SIZE, value=args.batch_size*hvd.size())
+        mllogger.event(key=mllog.constants.GLOBAL_BATCH_SIZE, value=args.batch_size * hvd.size())
     for epoch in range(resume_from_epoch, args.epochs):
-        if hvd.rank() == 0: 
-            mllogger.start(key=mllog.constants.EPOCH_START, metadata={"epoch_num": epoch+1})
+        if hvd.rank() == 0:
+            mllogger.start(key=mllog.constants.EPOCH_START, metadata={"epoch_num": epoch + 1})
         train(epoch)
         validate(epoch)
         save_checkpoint(epoch)
-        if hvd.rank() == 0: 
-            mllogger.start(key=mllog.constants.EPOCH_STOP, metadata={"epoch_num": epoch+1})
+        if hvd.rank() == 0:
+            mllogger.start(key=mllog.constants.EPOCH_STOP, metadata={"epoch_num": epoch + 1})
     if hvd.rank() == 0:
         mllogger.end(key=mllog.constants.RUN_STOP, metadata={"status": "success"})
