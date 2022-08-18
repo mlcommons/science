@@ -402,6 +402,22 @@ logging is the
 This library has the advantage of generating a human-readable summary
 table in addition to the MLCommons® log events.
 
+== Directory STructure for submission
+
+
+  ORGANIZATION/systems      # includes what are different computers and softwre setup
+  ORGANIZATION/results/SYSTEM/result[1-5].txt
+  ORGANIZATION/benchmarks/APPLICATION/implementations/SYSTEM
+
+Example:
+
+  UVA/systems/rivanna_a100_locascratch/config.yaml
+  UVA/systems/rivanna_a100_locascratch/batch.sh
+  
+  UVA/results/rivanna_a100_locascratch/result1.txt
+  
+  UVA/benchmarks/earhquake/implementations/rivanna_a100_locascratch
+
 
 [bibliography]
 == References
