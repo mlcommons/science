@@ -77,7 +77,9 @@ use these sequence of instructions:
    downloaded from here:
 
    ```bash
-   $ wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh```
+   $ wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
+   ```
+ 
 
 2. Install Anaconda
 
