@@ -183,7 +183,10 @@ def main():
     mllogger = mllog.get_mllogger()
     logger = logging.getLogger(__name__)
 
-     # Values extracted from cloudMaskConfig.yaml
+    # RUN START
+    mllogger.end(key=mllog.constants.RUN_START, value="CloudMask benchmark run start")
+
+    # Values extracted from cloudMaskConfig.yaml
     mllogger.event(key=mllog.constants.SUBMISSION_BENCHMARK, value=args['benchmark'])
     mllogger.event(key=mllog.constants.SUBMISSION_ORG, value=args['organisation'])
     mllogger.event(key=mllog.constants.SUBMISSION_DIVISION, value=args['division'])
@@ -195,7 +198,7 @@ def main():
     mllogger.event(key='number_of_nodes', value=args['nodes'])
     mllogger.event(key='accelerators_per_node', value=args['accelerators_per_node']) 
     mllogger.end(key=mllog.constants.INIT_STOP)
-    
+
     # Training
     start = time.time()
     mllogger.event(key=mllog.constants.EVAL_START, value="Start: Taining")
@@ -220,8 +223,10 @@ def main():
     print("number_inferences: ", number_inferences)
     with open(log_file, "a") as logfile:
         logfile.write(f"CloudMask inference, inferences={number_inferences}, bs={args['batch_size']}, nodes={args['nodes']}, gpus={args['gpu']}, time_per_inference={time_per_inference_str}\n")
-    
+
+    # RUN STOP
     mllogger.end(key=mllog.constants.RUN_STOP, value="CloudMask benchmark run finished", metadata={'status': 'success'})
+
 if __name__ == "__main__":
     main()
 
