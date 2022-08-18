@@ -184,7 +184,7 @@ def main():
     logger = logging.getLogger(__name__)
 
     # RUN START
-    mllogger.end(key=mllog.constants.RUN_STOP, value="CloudMask benchmark run start")
+    mllogger.end(key=mllog.constants.RUN_START, value="CloudMask benchmark run start")
 
     # Values extracted from cloudMaskConfig.yaml
     mllogger.event(key=mllog.constants.SUBMISSION_BENCHMARK, value=args['benchmark'])
