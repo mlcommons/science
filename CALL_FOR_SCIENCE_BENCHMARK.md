@@ -1,5 +1,7 @@
 # CALL FOR SCIENCE BENCHMARKS v0.1
 
+This page is located at: https://github.com/mlcommons/science/blob/main/CALL_FOR_SCIENCE_BENCHMARK.md
+
 The MLCommons® Science Group is pleased to announce an open call for science benchmarks.
 The benchmarks include at present 4 distinct benchmarks. Their description and
 documentation is located at the following links:
