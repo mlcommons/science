@@ -1,634 +1,421 @@
-Science Benchmark Policy: MLCommons® Science Benchmark Suite Rules
-Table of Contents
-1. Disclaimer
-2. Overview
-3. Relationship to the MLCommons HPC group
-4. Benchmarks
-5. Divisions
-5.1. Closed Division
-5.2. Open Division
-6. Data Set
-6.1. Data State at Start of Run
-6.2. Default Data Sets
-6.3. Open Data Sets
-6.4. Identifiers
-7. Training Loop
-7.1. Hyperparameters and Optimizer
-7.2. Hyperparameters and Optimizer Earth Quake Prediction
-7.3. Hyperparameters and Optimizer CloudMask
-7.4. Hyperparameters and Optimizer STEMDL Classification
-7.5. Hyperparameters and Optimizer CANDLE UNO
-8. Run Results
-8.1. Strong Scaling (Time to Convergence)
-8.2. Weak Scaling (Throughput)
-9. Benchmark Results
-10. Identifying Information
-11. Contribution
-12. Logging Libraries
-13. Directory Structure for submission
-References
-https://github.com/laszewsk/mlcommons/edit/main/www/content/en/docs/science_policy.adoc
+:toc:
+:toclevels: 5
 
+:sectnums:
+
+= Science Benchmark Policy: MLCommons® Science Benchmark Suite Rules
+
+
+* https://github.com/laszewsk/mlcommons/edit/main/www/content/en/docs/science_policy.adoc
+
+:sectnums:
 -v0.5
 
-Version 0.6 August 20, 2022
+Version 0.5
+August 1, 2022
 
 Points of contact:
 
-Geoffrey Fox(gcfexchange@gmail.com)
+* Geoffrey Fox(gcfexchange@gmail.com)
+* Tony Hey (Tony.Hey@stfc.ac.uk)
+* Gregor von Laszewski(laszewski@gmail.com)
+* Juri Papay (juripapay@hotmail.com)
+* Jeyan Thiyagalingam (t.jeyan@stfc.ac.uk)
 
-Tony Hey (Tony.Hey@stfc.ac.uk)
+== Disclaimer
 
-Gregor von Laszewski(laszewski@gmail.com)
+The MLPerf and https://mlcommons.org[MLCommons®] name and logo are
+trademarks. In order to refer to a result using the MLPerf and
+MLCommons® name, the result must conform to the letter and spirit of
+the rules specified in this document. The MLCommons® organization
+reserves the right to solely determine if a use of its name or logo is
+acceptable.
 
-Juri Papay (juripapay@hotmail.com)
 
-Jeyan Thiyagalingam (t.jeyan@stfc.ac.uk)
+== Overview
 
-1. Disclaimer
-The MLPerf and MLCommons® name and logo are trademarks. In order to refer to a result using the MLPerf and MLCommons® name, the result must conform to the letter and spirit of the rules specified in this document. The MLCommons® organization reserves the right to solely determine if a use of its name or logo is acceptable.
+Our goal is better science accuracy through benchmarks. Our main
+metric is the accuracy of the science. However, we will have secondary
+metrics that report time, space, and resources such as energy and
+temperature behavior.
 
-2. Overview
-Our goal is better science accuracy through benchmarks. Our main metric is the accuracy of the science. However, we will have secondary metrics that report time, space, and resources such as energy and temperature behavior.
+The Science WG will use training as the primary benchmark. Here we
+specify the rules for training submissions.
 
-The Science WG will use training as the primary benchmark. Here we specify the rules for training submissions.
+The Science WG will have Closed and Open divisions and submissions to
+these divisions must be separate although the same activity could
+qualify for both. The Open division is expected to be the primary
+focus.
 
-The Science WG will have Closed and Open divisions and submissions to these divisions must be separate although the same activity could qualify for both. The Open division is expected to be the primary focus.
+A Closed division submission should report system performance as the
+result and give the logging information outlined in MLPerf HPC
+Rules. The stopping criterion will be the value of loss specified in
+the benchmark. Power and temperature measurements may also be supplied.
 
-A Closed division submission should report system performance as the result and give the logging information outlined in MLPerf HPC Rules. The stopping criterion will be the value of loss specified in the benchmark. Power and temperature measurements may also be supplied.
+An Open division submission aims to improve scientific discovery from
+the dataset specified in the benchmark which will specify one or more
+scientific measurements to be calculated in the submission. The result
+will be the value of these specified measurements from the submitted
+model. This model can be based on the supplied reference model or
+distinct. Data augmentation is allowed and all hyperparameters
+can be changed in the reference model if used. The result should be a
+GitHub (markdown) document starting with a table listing *Measurement
+name*, *Reference model value*, *Submitted model value*. For benchmarks
+with more than one measurement, an average difference between submitted
+and reference measurements should be given. Power and
+performance values are optional but encouraged in the results
+document. The resulting document should give enough details on the
+submitted model and any data augmentation so that the review team can
+evaluate its scientific soundness. Citations should be included to
+describe the scientific basis of the approach. Other rules for the
+Open division are as described in MLCommons® Training Rules, however, there are no special rules for the Open Science division.
 
-An Open division submission aims to improve scientific discovery from the dataset specified in the benchmark which will specify one or more scientific measurements to be calculated in the submission. The result will be the value of these specified measurements from the submitted model. This model can be based on the supplied reference model or distinct. Data augmentation is allowed and all hyperparameters can be changed in the reference model if used. The result should be a GitHub (markdown) document starting with a table listing Measurement name, Reference model value, Submitted model value. For benchmarks with more than one measurement, an average difference between submitted and reference measurements should be given. Power and performance values are optional but encouraged in the results document. The resulting document should give enough details on the submitted model and any data augmentation so that the review team can evaluate its scientific soundness. Citations should be included to describe the scientific basis of the approach. Other rules for the Open division are as described in MLCommons® Training Rules, however, there are no special rules for the Open Science division.
+To showcase the various aspects of the benchmarks and contrast it to
+with existing training benchmarks from MLCommons® at the time of writing
+of this document, we have included Table 1.
+The first line *Non Science Training Closed* refers to training conducted by
+other MLCommons® groups.
+The rows with Science in the Division show the target attributes for that
+division so the focus of the benchmarks can easily be contrasted. Each collumn showcases an attribute and how it is different between the divisions and other MLCommons non science benchmarks.
 
-To showcase the various aspects of the benchmarks and contrast it to with existing training benchmarks from MLCommons® at the time of writing of this document, we have included Table 1. The first line Non Science Training Closed refers to training conducted by other MLCommons® groups. The rows with Science in the Division show the target attributes for that division so the focus of the benchmarks can easily be contrasted. Each collumn showcases an attribute and how it is different between the divisions and other MLCommons non science benchmarks.
 
 Table 1: Targeted aspects of the MLCommons® Science benchmark.
 
-Division
-
-Hardware System
-
-Training data
-
-Model
-
-Test data / method
-
-Primary Metric
-
-Secondary Metrics (optional)
-
-Non Science Training Closed
-
-Anything
-
-Fixed
-
-Fixed
-
-Fixed
-
-Speed
-
-None
-
-Science Closed
-
-Anything
-
-Fixed
-
-Variable
-
-Fixed
-
-"Science Quality", Accuracy
-
-Time, memory, power
-
-Science Open
-
-Anything
-
-Variable
-
-Variable
-
-Fixed
-
-"Science Quality", Accuracy, Optional user-defined metric
-
-Time, memory, power
+|===
+| Division | Hardware System | Training data | Model | Test data / method | Primary Metric | Secondary Metrics (optional)
+| *Non Science Training Closed* | *Anything* | *Fixed* | *Fixed* | *Fixed* | *Speed* | *None*
+| Science Closed | Anything | Fixed | Variable | Fixed | "Science Quality", Accuracy | Time, memory, power
+| Science Open | Anything | Variable | Variable | Fixed | "Science Quality", Accuracy, Optional user-defined metric | Time, memory, power
+|===
 
 The secondary metrics include
 
-Space
+* Space
+* Time
+* Energy
+* Different datasets
 
-Time
+All rules are taken from the
+https://github.com/mlcommons/training_policies/blob/master/training_rules.adoc[MLPerf
+Training Rules] except for those that are overridden here.
 
-Energy
+== Relationship to the MLCommons HPC group
 
-Different datasets
+HPC working group has a focus on infrastructure and closed division
+Science working group has a focus on science and the open division.
 
-All rules are taken from the MLPerf Training Rules except for those that are overridden here.
+While in HPC the focus of the benchmarks is on infrastructure, the
+focus here is on scientific accuracy.  Nevertheless, the scientific
+benchmark applications could be used in some cases for HPC evaluation.
 
-3. Relationship to the MLCommons HPC group
-HPC working group has a focus on infrastructure and closed division Science working group has a focus on science and the open division.
 
-While in HPC the focus of the benchmarks is on infrastructure, the focus here is on scientific accuracy. Nevertheless, the scientific benchmark applications could be used in some cases for HPC evaluation.
+== Benchmarks
 
-4. Benchmarks
-The benchmark suite consists of the benchmarks shown in the following table.
+The benchmark suite consists of the benchmarks shown in the following
+table.
 
-Problem
+|===
+|Problem |Dataset |Quality Target
+| Earthquake Prediction |Earthquake data from USGS. | Normalized Nash–Sutcliffe model efficiency (NNSE), `0.8<NNSE<0.99`, Details can be found in [3].
+| CloudMask | Multispectral image data from Sea and Land Surface Temperature Radiometer (SLSTR) instrument. | convergence target `0.9`
+| STEMDL Classification | Convergent Beam Electron Diffraction (CBED) patterns. | The scientific metric for this problem is the top1 classification accuracy and F1-score (the higher the better). The main challenge is to predict 3D geometry from its 3 projections (2D images). Information about the best accuracy so far for this dataset can be found in [4]
+| UNO |Molecular features of tumor cells across multiple data sources. | Score: `0.0054`
+|===
 
-Dataset
+== Divisions
 
-Quality Target
+There are two divisions of the Science Benchmark Suite, the Closed
+division and the Open division.
 
-Earthquake Prediction
 
-Earthquake data from USGS.
+=== Closed Division
 
-Normalized Nash–Sutcliffe model efficiency (NNSE), 0.8<NNSE<0.99, Details can be found in [3].
-
-CloudMask
-
-Multispectral image data from Sea and Land Surface Temperature Radiometer (SLSTR) instrument.
-
-convergence target 0.9
-
-STEMDL Classification
-
-Convergent Beam Electron Diffraction (CBED) patterns.
-
-The scientific metric for this problem is the top1 classification accuracy and F1-score (the higher the better). The main challenge is to predict 3D geometry from its 3 projections (2D images). Information about the best accuracy so far for this dataset can be found in [4]
-
-UNO
-
-Molecular features of tumor cells across multiple data sources.
-
-Score: 0.0054
-
-5. Divisions
-There are two divisions of the Science Benchmark Suite, the Closed division and the Open division.
-
-5.1. Closed Division
-The Closed division requires using the same preprocessing, model, and training method as the reference implementation.
+The Closed division requires using the same preprocessing, model, and
+training method as the reference implementation.
 
 The closed division models are:
 
-Problem
+|===
+|Problem | Repository
+|EarthQuake  | https://github.com/mlcommons/science/
+|CloudMask | https://github.com/mlcommons/science/
+|STEMDL  | https://github.com/mlcommons/science/
+|CANDLE UNO  | https://github.com/mlcommons/science/
+|===
 
-Repository
+Allowed hyperparameter and optimizer settings are specified in the
+section *Hyperparameters and Optimizer*. For anything not explicitly
+mentioned there, submissions must match the behavior and settings of
+the reference implementations.
 
-EarthQuake
+In order to simplify the complex setup for scientific benchmarks,
+we recommend that all parameters are included in the config file when available.
+We recommend a YAML format for the config file.
 
-https://github.com/mlcommons/science/
 
-CloudMask
+=== Open Division
 
-https://github.com/mlcommons/science/
+Hyperparameters and optimizers may be freely changed.  For Science
+benchmarks this is the most important division as the goal is to
+improve the science and identify algorithms that optimize the
+science. For this reason, any algorithm and hyperparameter
+specification for that algorithm is allowed.
 
-STEMDL
+As this may include new algorithms we like to collect them as
+discussed in the *Contribution* section.
 
-https://github.com/mlcommons/science/
+When specifying new algorithms, please provide us with the set of
+hyperparameters as defined by the examples given in this document.
 
-CANDLE UNO
+Algorithms in the Open Division must be properly documented and
+archived in a GitHub repository with a tagged version so they can
+easily be reproduced.  To be fully included the code must be archived
+in the official MLCommons® Science GitHub repository.
 
-https://github.com/mlcommons/science/
+As the algorithms provided here can also be used in the open division
+we place the same rules on them as other algorithms.
 
-Allowed hyperparameter and optimizer settings are specified in the section Hyperparameters and Optimizer. For anything not explicitly mentioned there, submissions must match the behavior and settings of the reference implementations.
-
-In order to simplify the complex setup for scientific benchmarks, we recommend that all parameters are included in the config file when available. We recommend a YAML format for the config file.
-
-5.2. Open Division
-Hyperparameters and optimizers may be freely changed. For Science benchmarks this is the most important division as the goal is to improve the science and identify algorithms that optimize the science. For this reason, any algorithm and hyperparameter specification for that algorithm is allowed.
-
-As this may include new algorithms we like to collect them as discussed in the Contribution section.
-
-When specifying new algorithms, please provide us with the set of hyperparameters as defined by the examples given in this document.
-
-Algorithms in the Open Division must be properly documented and archived in a GitHub repository with a tagged version so they can easily be reproduced. To be fully included the code must be archived in the official MLCommons® Science GitHub repository.
-
-As the algorithms provided here can also be used in the open division we place the same rules on them as other algorithms.
-
-Most importantly the scientific accuracy must be measured in the same fashion so that alternative implementations and hyperparameter choices can be compared with each other. Each science application provides a well-defined single or a set of comparative measures to evaluate the scientific accuracy. The measure(s) should be widely accepted by the science community
+Most importantly the scientific accuracy must be measured in the same fashion so that alternative implementations and hyperparameter choices can be compared with each other. Each science application provides a well-defined single or a set of
+comparative measures to evaluate the scientific accuracy. The measure(s) should be widely accepted by the science community
 
 Algorithms that are not open source do not qualify for the science benchmarks as reproducibility and reviews are limited.
 
-6. Data Set
-6.1. Data State at Start of Run
-Each reference implementation includes a download script or broadly available method to acquire and verify the dataset.
 
-The data at the start of the benchmark run should reside on a parallel file system that is persistent (>= 1 month, not subject to eviction by other users), can be downloaded to / accessed by the user, and can be shared among users at the facility. Any staging to node-local disk or memory or system burst buffer should be included in the benchmark time measurement.
+== Data Set
 
-You must flush/reset the on-node caches prior to running each instance of the benchmark. Due to practicality issues, you are not required to reset off-node system-level caches.
+=== Data State at Start of Run
 
-We otherwise follow the training rule Data State at Start of Run on consistency with the reference implementation preprocessing and allowance for reformatting.
+Each reference implementation includes a download script or broadly
+available method to acquire and verify the dataset.
 
-6.2. Default Data Sets
-For the closed division, we have a number of defined data sets that can be used for obtaining scientific results. This allows us an easier review.
+The data at the start of the benchmark run should reside on a parallel
+file system that is persistent (>= 1 month, not subject to eviction by
+other users), can be downloaded to / accessed by the user, and can be
+shared among users at the facility. Any staging to node-local disk or
+memory or system burst buffer should be included in the benchmark time
+measurement.
 
-6.3. Open Data Sets
-For the open division, we also allow open data sets to be part of the submission if the submitter considers data augmentation achieves better science. The ability for us to review the dataset and instructions for replication will need to be supplied by the submitter. We will be introducing unique identifiers for the model and data to allow convenient identification of the input data and models.
+You must flush/reset the on-node caches prior to running each instance
+of the benchmark. Due to practicality issues, you are not required to
+reset off-node system-level caches.
 
-6.4. Identifiers
-All benchmark sources are contained in a GitHub repository and a tagged version is provided for all benchmarked applications. In addition, all data will be using a tagging mechanism and will be part of the benchmark submission. If the data fits in GitHub we will be using GitHub. Otherwise, we will be placing it in a data archive that is openly accessible.
+We otherwise follow the training rule
+https://github.com/mlcommons/training_policies/blob/master/training_rules.adoc#6-data-set[Data
+State at Start of Run] on consistency with the reference
+implementation preprocessing and allowance for reformatting.
 
-We support the DataPerf MLCommons® working group studies to integrate such identifiers and when available will evaluate their integration.
+=== Default Data Sets
 
-7. Training Loop
+For the closed division, we have a number of defined data sets that can
+be used for obtaining scientific results. This allows us an easier
+review.
+
+=== Open Data Sets
+
+For the open division, we also allow open data sets to be part of the
+submission if the submitter considers data augmentation achieves
+better science.  The ability for us to review the dataset and
+instructions for replication will need to be supplied by the
+submitter.  We will be introducing unique identifiers for the model
+and data to allow convenient identification of the input data and
+models.
+
+=== Identifiers
+
+All benchmark sources are contained in a GitHub repository and a tagged version is
+provided for all benchmarked applications. In addition, all data will be using a
+tagging mechanism and will be part of the benchmark submission. If the data fits in GitHub we will be using GitHub. Otherwise, we will be placing it in a data archive that is openly accessible.
+
+We support the DataPerf MLCommons® working group studies to
+integrate such identifiers and when available will evaluate their integration.
+
+== Training Loop
+
 Our focus is the training of data, but it may take considerable effort to prepare the data for the training loop. Such preparation and their performance is integrated into the benchmark.
 
-7.1. Hyperparameters and Optimizer
+=== Hyperparameters and Optimizer
+
 Each application has its own hyperparameters and optimizer configurations. They can be controlled with the parameters listed for each application.
 
-7.2. Hyperparameters and Optimizer Earth Quake Prediction
-Model
+=== Hyperparameters and Optimizer Earth Quake Prediction
 
-Name
+|===
+| Model | Name | Constraint | Definition | Reference Configuration
+| Earthquake | TFTTransformerepochs| `0 < value` | num_epochs | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake | TFTTransformerbatch_size | `0 < value`, example: `64` | batch size to split training data into batches used to calculate model error and update model coefficients | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake | TFTTransformertestvalbatch_size | `max(128,TFTTransformerbatch_size)` | this is a range between min and max for batch size | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake | TFTd_model | `0 < value`. Example: `160` | number of hidden layers in model |
+| Earthquake | Tseq | `0 < value`. Example `26` | num of encoder steps. The size of sequence window, number of days included in that section of data | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake |  TFTdropout_rate | `9.9 < value`. Example: `0.1`  | dropout rate: the dropout rate when training models to randomly drop nodes from a neural network to prevent overfitting |https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake | learning_rate | `0.0 < value`. Example: `0.0000005` | how quickly the model adapts to the problem, larger means faster convergence but less optimal solutions, slower means slower convergence but more optimal solutions potentially fail if the learning rate is too small. In general, a variable learning rate is best. start larger and decrease as you see fewer returns or as your solution converges. | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+| Earthquake | early_stopping_patience | `0 < value`. Example: `60` |  Early stopping param for Keras, a way to prevent overfit or various metric decreases | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest/experiments[config], https://github.com/laszewsk/mlcommons/blob/main/benchmarks/earthquake/latest/experiments/rivanna/rivanna-shm.yaml[UVA]
+|===
 
-Constraint
+=== Hyperparameters and Optimizer CloudMask
 
-Definition
+|===
+|Model |Name |Constraint |Definition |Reference Configuration
+| CloudMask | epochs| `value > 0` | Number of epochs | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+| CloudMask | learning_rate| `value > 0.0`. Example: `0.001` | Learning rate | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+| CloudMask | batch_size| `value > 0`. Example: `32` | Batch size | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+| CloudMask | MIN_SST| `value > 273.15` | Min allowable Sea Surface Temperature | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+| CloudMask | PATCH_SIZE| `value = 256` | Size of image patches | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+| CloudMask | seed| `value = 1234` | Random seed | https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/cloudMaskConfig.yaml[config]
+|===
 
-Reference Configuration
+=== Hyperparameters and Optimizer STEMDL Classification
 
-Earthquake
+|===
+| Model | Name | Constraint | Definition | Reference Configuration
+| STEMDL | num_epochs| `value > 0` | Number of epochs | https://github.com/mlcommons/science/blob/main/benchmarks/stemdl/stfc/stemdlConfig.yaml[config]
+| STEMDL | learning_rate| `value > 0.0`. Example: `0.001` | Learning rate | https://github.com/mlcommons/science/blob/main/benchmarks/stemdl/stfc/stemdlConfig.yaml[config]
+| STEMDL | batch_size| `value > 0`.Example: `32` | Batch size | https://github.com/mlcommons/science/blob/main/benchmarks/stemdl/stfc/stemdlConfig.yaml[config]
+|===
 
-TFTTransformerepochs
+=== Hyperparameters and Optimizer CANDLE UNO
 
-0 < value
+|===
+| Model | Name | Constraint | Definition | Reference Configuration
+| CANDLE UNO | num_epochs| `value > 0` |  Number of epochs |
+| CANDLE UNO | learning_rate| `value > 0.0`. Example: `0.001` | Learning rate |
+| CANDLE UNO | batch_size| `value > 0`.Example: `32` | Batch size |
+|===
 
-num_epochs
 
-config, UVA
 
-Earthquake
+== Run Results
 
-TFTTransformerbatch_size
+MLCommon® Science Benchmark Suite submissions consist of the following
+three metrics: metrics 1 is considered mandatory for a complete
+submission whereas metrics 2 and 3 are considered optional.
 
-0 < value, example: 64
+=== Strong Scaling (Time to Convergence)
 
-batch size to split training data into batches used to calculate model error and update model coefficients
+This is a *mandatory* metric (see MLPerf Training
+https://github.com/mlcommons/training_policies/blob/master/training_rules.adoc#section-run-results[Run Results]).
+The same rules apply here.
 
-config, UVA
+=== Weak Scaling (Throughput)
 
-Earthquake
-
-TFTTransformertestvalbatch_size
-
-max(128,TFTTransformerbatch_size)
-
-this is a range between min and max for batch size
-
-config, UVA
-
-Earthquake
-
-TFTd_model
-
-0 < value. Example: 160
-
-number of hidden layers in model
-
-Earthquake
-
-Tseq
-
-0 < value. Example 26
-
-num of encoder steps. The size of sequence window, number of days included in that section of data
-
-config, UVA
-
-Earthquake
-
-TFTdropout_rate
-
-9.9 < value. Example: 0.1
-
-dropout rate: the dropout rate when training models to randomly drop nodes from a neural network to prevent overfitting
-
-config, UVA
-
-Earthquake
-
-learning_rate
-
-0.0 < value. Example: 0.0000005
-
-how quickly the model adapts to the problem, larger means faster convergence but less optimal solutions, slower means slower convergence but more optimal solutions potentially fail if the learning rate is too small. In general, a variable learning rate is best. start larger and decrease as you see fewer returns or as your solution converges.
-
-config, UVA
-
-Earthquake
-
-early_stopping_patience
-
-0 < value. Example: 60
-
-Early stopping param for Keras, a way to prevent overfit or various metric decreases
-
-config, UVA
-
-7.3. Hyperparameters and Optimizer CloudMask
-Model
-
-Name
-
-Constraint
-
-Definition
-
-Reference Configuration
-
-CloudMask
-
-epochs
-
-value > 0
-
-Number of epochs
-
-config
-
-CloudMask
-
-learning_rate
-
-value > 0.0. Example: 0.001
-
-Learning rate
-
-config
-
-CloudMask
-
-batch_size
-
-value > 0. Example: 32
-
-Batch size
-
-config
-
-CloudMask
-
-MIN_SST
-
-value > 273.15
-
-Min allowable Sea Surface Temperature
-
-config
-
-CloudMask
-
-PATCH_SIZE
-
-value = 256
-
-Size of image patches
-
-config
-
-CloudMask
-
-seed
-
-value = 1234
-
-Random seed
-
-config
-
-7.4. Hyperparameters and Optimizer STEMDL Classification
-Model
-
-Name
-
-Constraint
-
-Definition
-
-Reference Configuration
-
-STEMDL
-
-num_epochs
-
-value > 0
-
-Number of epochs
-
-config
-
-STEMDL
-
-learning_rate
-
-value > 0.0. Example: 0.001
-
-Learning rate
-
-config
-
-STEMDL
-
-batch_size
-
-value > 0.Example: 32
-
-Batch size
-
-config
-
-7.5. Hyperparameters and Optimizer CANDLE UNO
-Model
-
-Name
-
-Constraint
-
-Definition
-
-Reference Configuration
-
-CANDLE UNO
-
-num_epochs
-
-value > 0
-
-Number of epochs
-
-CANDLE UNO
-
-learning_rate
-
-value > 0.0. Example: 0.001
-
-Learning rate
-
-CANDLE UNO
-
-batch_size
-
-value > 0.Example: 32
-
-Batch size
-
-8. Run Results
-MLCommon® Science Benchmark Suite submissions consist of the following three metrics: metrics 1 is considered mandatory for a complete submission whereas metrics 2 and 3 are considered optional.
-
-8.1. Strong Scaling (Time to Convergence)
-This is a mandatory metric (see MLPerf Training Run Results). The same rules apply here.
-
-8.2. Weak Scaling (Throughput)
 At this time we are not considering weak scaling.
 
-9. Benchmark Results
-We follow MLPerf Training Benchmark Results rule along with the following required number of runs per benchmark. Note that since run-to-run variability is already captured by spatial multiplexing in case of metric 3, we use the adjusted requirement that the number of trained instances have to be at least equal to the number of runs for metric 1 and 2.
+== Benchmark Results
 
-The numbers given below reflect the minimum number of repetitive runs required to produce repeatable metrics. In the case of the Earthquake benchmark, we have reduced the number of runs to 1 for metric 1, as the runs take a long time (between 5 - 12h on NVidia GPUs).
+We follow MLPerf Training Benchmark Results rule along with the
+following required number of runs per benchmark.  Note that since
+run-to-run variability is already captured by spatial multiplexing in
+case of metric 3, we use the adjusted requirement that the number of
+trained instances have to be at least equal to the number of runs for
+metric 1 and 2.
 
-Number of Runs
+The numbers given below reflect the minimum number of repetitive runs
+required to produce repeatable metrics.  In the case of the Earthquake
+benchmark, we have reduced the number of runs to 1 for metric 1, as
+the runs take a long time (between 5 - 12h on NVidia GPUs).
 
-Number of Runs
-
-Number of Runs
-
-Benchmark
-
-Metric 1
-
-Metric 2
-
-Metric 3
-
-Earthquake
-
-1
-
-5
-
->=5
-
-CloudMask
-
-10
-
-10
-
->=10
-
-STEMDL Classification
-
-5
-
-5
-
->=5
-
-CANDLE UNO
-
-5
-
-5
-
->=5
+|===
+| |Number of Runs |Number of Runs |Number of Runs
+|Benchmark | Metric 1 |  Metric 2 | Metric 3
+|Earthquake | 1 | 5 | >=5
+|CloudMask | 10 | 10 | >=10
+|STEMDL Classification | 5 | 5 | >=5
+|CANDLE UNO | 5 | 5 | >=5
+|===
 
 For the closed division, we will have one or more sample submission results.
 
-The results are tared and submitted through the MLCommons® submission process.
+// Their links are listed in the following table
+//
+// |===
+// |Benchmark | single benchmark output log file
+// |Earthquake | TODO: link
+// |CloudMask | TODO: link
+// |STEMDL Classification | TODO: link
+// |CANDLE UNO | TODO: link
+// |===
+//
+// In case of repeated logs, they are placed into a directory.
 
-10. Identifying Information
-To identify a benchmark user must add the following information at the beginning of the submission (We use here an example for the Earthquake Benchmark:
+The results are tared and submitted through the https://github.com/mlcommons/policies/blob/master/submission_rules.adoc[MLCommons®
+submission process].
 
-name: Earthquake
-user: Gregor von Laszewski
-e-mail: laszewski@gmail.com
-organisation:  University of Virginia
-division: BII
-status: submission
-platform: rivanna shared memory
-This can easily be achieved through a configuration file and inclusion into the benchmark with the MLcommons® logging library.
+== Identifying Information
 
-11. Contribution
-We expect that over time additional benchmarks will be contributed. At this time we have adopted the following best practice for contribution:
+To identify a benchmark user must add the following information at the
+beginning of the submission (We use here an example for the Earthquake
+Benchmark:
 
-The initial benchmark is hosted on a group-accessible GitHub repository, where members have full access rights. These may be different repositories. Currently, we have one repository at [10].
+  name: Earthquake
+  user: Gregor von Laszewski
+  e-mail: laszewski@gmail.com
+  organisation:  University of Virginia
+  division: BII
+  status: submission
+  platform: rivanna shared memory
 
-New version will first be made available in that group repository while using branching.
+This can easily be achieved through a configuration file and inclusion
+into the benchmark with the MLcommons® logging library.
 
-A new candidate version is created and merged into main.
 
-The candidate version is internally tested by the group members to evaluate expected behavior.
 
-Once passed, the code is uploaded to the MLCommons® Science GitHub Repository [9].
+== Contribution
 
-Announcements are made to solicit submissions.
+We expect that over time additional benchmarks will be contributed. At
+this time we have adopted the following best practice for
+contribution:
 
-Submissions are checked and integrated according to the MLCommons® rules and policies.
+1. The initial benchmark is hosted on a group-accessible GitHub
+   repository, where members have full access rights. These may be
+   different repositories. Currently, we have one repository at
+   https://github.com/laszewsk/mlcommons[[10]].
+2. New version will first be made available in that group repository while using branching.
+3. A new candidate version is created and merged into main.
+4. The candidate version is internally tested by the group members to evaluate expected behavior.
+5. Once passed, the code is uploaded to the  https://github.com/mlcommons/science[MLCommons® Science GitHub Repository [9]].
+6. Announcements are made to solicit submissions.
+7. Submissions are checked and integrated according to the MLCommons® rules and policies.
 
 The links to the current development repositories are as follows:
 
-Problem
 
-MLCommons® Repository
+|===
+| Problem | MLCommons® Repository | Development Repository
+| EarthQuake  | https://github.com/mlcommons/science/tree/main/benchmarks/earthquake[link] | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/earthquake/latest[link]
+| CloudMask | https://github.com/mlcommons/science/tree/main/benchmarks/cloudmask[link] | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/cloudmask[link]
+| STEMDL  | https://github.com/mlcommons/science/tree/main/benchmarks/stemdl[link] | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/stemdl[link]
+| CANDLE UNO | https://github.com/mlcommons/science/tree/main/benchmarks/uno[link] | https://github.com/laszewsk/mlcommons/tree/main/benchmarks/uno[link]
+|===
 
-Development Repository
+== Logging Libraries
 
-EarthQuake
+Augmentation of codes for consideration into the inclusion of the
+science benchmarks must use the
 
-link
+* https://github.com/mlcommons/logging[MLCommons® Logging Library]
 
-link
+An alternative library that internally produces MLCommons® events for
+logging is the
 
-CloudMask
+* https://github.com/cloudmesh/cloudmesh-common/blob/main/cloudmesh/common/StopWatch.py[StopWatch] from https://github.com/cloudmesh/cloudmesh-common[cloudmesh-common]
+* https://github.com/cloudmesh/cloudmesh-common/blob/main/README-mlcommons.md[Quickstart for using Cloudmesh StopWatch for MLcommons]
 
-link
+This library has the advantage of generating a human-readable summary
+table in addition to the MLCommons® log events.
 
-link
 
-STEMDL
+== Directory Structure for submission
 
-link
+In this section we document the directory structure for submissions. We introduce the following variables denoted by `{ }` around the Variable name. The backest `[ ]` are used to donate a list
 
-link
+`{organization}` ::= The organization submitting the benchmark
 
-CANDLE UNO
+`{application}` ::= The application, a value from [cloudmask,earthquake,uno,stemdl]
 
-link
+`{system}` ::= Defines the system used for this benchmark
 
-link
+`{descriptor}` ::= The descriptor of the experiment
 
-12. Logging Libraries
-Augmentation of codes for consideration into the inclusion of the science benchmarks must use the
-
-MLCommons® Logging Library
-
-An alternative library that internally produces MLCommons® events for logging is the
-
-StopWatch from cloudmesh-common
-
-Quickstart for using Cloudmesh StopWatch for MLcommons
-
-This library has the advantage of generating a human-readable summary table in addition to the MLCommons® log events.
-
-13. Directory Structure for submission
-In this section we document the directory structure for submissions. We introduce the following variables denoted by { } around the Variable name. The backest [ ] are used to donate a list
-
-{organization} ::= The organization submitting the benchmark
-
-{application} ::= The application, a value from [cloudmask,earthquake,uno,stemdl]
-
-{system} ::= Defines the system used for this benchmark
-
-{descriptor} ::= The descriptor of the experiment
-
-{n} ::= number of repeated experiments
+`{n}` ::= number of repeated experiments
 
 All results are stored in a directory such as
 
@@ -638,9 +425,9 @@ Within this directory, all parameters for that experiment are stored, so that al
 
 This includes
 
-result[1-{n}].txt ::= The result logs for n runs with the same parameters
+`result[1-{n}].txt` ::= The result logs for n runs with the same parameters
 
-config.yaml ::= A configuration file that contains all hyperparameters and other parameters to define a run. This configuration file contains an entry that uniquely describes the version of the code that is run. The version must be included in the mlcommons benchmark repository
+`config.yaml` ::= A configuration file that contains all hyperparameters and other parameters to define a run. This configuration file contains an entry that uniquely describes the version of the code that is run. The version must be included in the mlcommons benchmark repository
 
 ```
 github:
@@ -661,25 +448,53 @@ In some cases, a program may be used to run multiple experiments and create such
 
 directory, so such parameterized runs can be conducted, while also replicating the appropriate directory structure.
 
-References
+
+
+[bibliography]
+== References
+
 We included here a list of supporting and related documents
 
-[1] Overview presentation of the MLScience Group Barrett, Wahid Bhimji, Bala Desinghu, Murali Emani, Geoffrey Fox, Grigori Fursin, Tony Hey, David Kanter, Christine Kirkpatrick,Hai Ah Nam, Juri Papay, Amit Ruhela, Mallikarjun Shankar, Jeyan Thiyagalingam Aristeidis Tsaris, Gregor von Laszewski, Feiyi Wang, Junqi Yin , MLCommons® Community Meeting, (also available in Google docs), December 9 2021.
+* [1] https://github.com/laszewsk/mlcommons/raw/main/pub/Science-WG-of-MLCommons®-presentation.pdf[Overview presentation of the MLScience Group]  Barrett,
+Wahid Bhimji,
+Bala Desinghu,
+Murali Emani,
+Geoffrey Fox,
+Grigori Fursin,
+Tony Hey,
+David Kanter,
+Christine Kirkpatrick,Hai Ah Nam,
+Juri Papay,
+Amit  Ruhela,
+Mallikarjun Shankar,
+Jeyan Thiyagalingam
+Aristeidis Tsaris,
+Gregor von Laszewski,
+Feiyi Wang,
+Junqi Yin
+, MLCommons® Community Meeting, (also available in
+https://docs.google.com/presentation/d/1xo_M3dEV1BS7OcXjvjyOUOLkHh8WyHuawqj1OR2iJw4/edit#slide=id.g10e8f04304c_1_73[Google docs]), December 9 2021.
 
-[2] AI Benchmarking for Science: Efforts from the MLCommons® Science Working Group, Jeyan Thiyagalingam, Gregor von Laszewski, Junqi Yin, Murali Emani, Juri Papay, Gregg Barrett, Piotr Luszczek, Aristeidis Tsaris, Christine Kirkpatrick, Feiyi Wang, Tom Gibbs, Venkatram Vishwanath, Mallikarjun Shankar, Geoffrey Fox, Tony Hey, June 2022
+* [2] https://github.com/laszewsk/mlcommons/raw/main/pub/mlcommons_science_wg_paper_2022.pdf[AI Benchmarking for Science: Efforts from the
+MLCommons® Science Working Group], Jeyan Thiyagalingam, Gregor von Laszewski, Junqi Yin, Murali Emani,
+Juri Papay, Gregg Barrett, Piotr Luszczek, Aristeidis Tsaris,
+Christine Kirkpatrick, Feiyi Wang, Tom Gibbs, Venkatram Vishwanath,
+Mallikarjun Shankar, Geoffrey Fox, Tony Hey, June 2022
 
-[3] Earthquake Nowcasting with Deep Learning, Fox, G., Rundle, J., Donnellan, A., Feng, B., Geohazards 3(2), 199, April 2022
+* [3] https://mdpi-res.com/d_attachment/geohazards/geohazards-03-00011/article_deploy/geohazards-03-00011-v2.pdf?version=1650104721[Earthquake Nowcasting with Deep
+Learning], Fox, G., Rundle, J., Donnellan, A., Feng, B., Geohazards 3(2), 199, April 2022
 
-[4] Probability Flow for Classifying Crystallographic Space Groups Pan, J., In: Nichols, J., Verastegui, B., Maccabe, A.‘., Hernandez, O., Parete-Koon, S., Ahearn, T. (eds) Driving Scientific and Engineering Discoveries Through the Convergence of HPC, Big Data and AI. SMC 2020. Communications in Computer and Information Science, vol 1315. Springer, Cham., 2022
+* [4] https://doi.org/10.1007/978-3-030-63393-6_30[Probability Flow for Classifying Crystallographic Space Groups] Pan, J.,  In: Nichols, J., Verastegui, B., Maccabe, A.‘., Hernandez, O., Parete-Koon, S., Ahearn, T. (eds) Driving Scientific and Engineering Discoveries Through the Convergence of HPC, Big Data and AI. SMC 2020. Communications in Computer and Information Science, vol 1315. Springer, Cham., 2022
 
-[5] MLCommons® Policies
 
-[6] MLCommons® Training policies
+* [5] https://mlcommons.org/en/policies/[MLCommons® Policies]
 
-[7] MLCommons® Interference Policies
+* [6] https://github.com/mlcommons/training_policies[MLCommons® Training policies]
 
-[8] MLCommons® submission Rules for training and inference
+* [7] https://github.com/mlcommons/inference_policies[MLCommons® Interference Policies]
 
-[9] MLCommons® Science GitHub Repository
+* [8] https://github.com/mlcommons/policies[MLCommons® submission Rules for training and inference]
 
-[10] Science Development GitHub Repository to prepare release candidates for the MLCommons® repository
+* [9] https://github.com/mlcommons/science[MLCommons® Science GitHub Repository]
+
+* [10] https://github.com/laszewsk/mlcommons[Science Development GitHub Repository to prepare release candidates for the MLCommons® repository]
