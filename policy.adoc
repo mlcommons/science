@@ -419,13 +419,13 @@ In this section we document the directory structure for submissions. We introduc
 
 All results are stored in a directory such as
 
-{organization}/{application}/{system}/{descriptor}
+{organization}/{application}/{system}/{descriptor}/result-{n}
 
 Within this directory, all parameters for that experiment are stored, so that all information for the experiment are self-contained within the experiment.
 
 This includes
 
-`result[1-{n}].txt` ::= The result logs for n runs with the same parameters
+`result.txt` ::= The result logs for n runs with the same parameters
 
 `config.yaml` ::= A configuration file that contains all hyperparameters and other parameters to define a run. This configuration file contains an entry that uniquely describes the version of the code that is run. The version must be included in the mlcommons benchmark repository
 
@@ -436,6 +436,7 @@ github:
   version:
   tag:
 ```
+
 an additional README.md and sufficient information to create such runs need to be provided in the
 
 A number of scripts that are used to run the particular benchmark on the specified system to allow reproducibility.
@@ -444,9 +445,7 @@ A README.md file that describes how to run it.
 
 In some cases, a program may be used to run multiple experiments and create such a directory automatically. Enough information must be included in the
 
-{organization}/{application}/{system}
-
-directory, so such parameterized runs can be conducted, while also replicating the appropriate directory structure.
+directory, so such parameterized runs can be conducted, while also replicating the appropriate directory structure. The reason we require for each result its own subdir is to allow output notebooks and comments to be submitted for each of the results if needed. This is especially the case when jupyter notebooks are used as the benchmark to be executed, allowing the notebook with all its cells to be submitted along the results.txt file.
 
 
 
