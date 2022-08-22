@@ -425,7 +425,7 @@ Within this directory, all parameters for that experiment are stored, so that al
 
 This includes
 
-`result.txt` ::= The result logs for n runs with the same parameters
+`result.txt` ::= The result logs for the `n`-th run with the parameters defined by `config.yaml`
 
 `config.yaml` ::= A configuration file that contains all hyperparameters and other parameters to define a run. This configuration file contains an entry that uniquely describes the version of the code that is run. The version must be included in the mlcommons benchmark repository
 
