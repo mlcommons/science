@@ -1,8 +1,13 @@
 # MLCommons® Science
 
+
 The main working group Web page is at: 
 
 * <https://mlcommons.org/en/groups/research-science/>
+
+Call for benchmarks is located at: 
+
+* <https://github.com/mlcommons/science/blob/main/CALL_FOR_SCIENCE_BENCHMARK.md>
 
 The working group github is located at 
 
@@ -10,7 +15,7 @@ The working group github is located at
 
 The Policy document is located at 
 
-* <https://mlcommons.github.io/science/policy.adoc>
+* <https://github.com/mlcommons/science/blob/main/policy.adoc>
 
 The following descriptions and code to scientific benchmarks are avialable at:
 

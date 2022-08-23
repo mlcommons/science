@@ -9,7 +9,7 @@
 
 * Version 0.5
 * August 1, 2022
-* https://mlcommons.github.io/science/policy.adoc
+* https://github.com/mlcommons/science/blob/main/policy.adoc
 
 Points of contact:
 
