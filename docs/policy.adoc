@@ -5,14 +5,11 @@
 
 = Science Benchmark Policy: MLCommons® Science Benchmark Suite Rules
 
-
-* https://github.com/laszewsk/mlcommons/edit/main/www/content/en/docs/science_policy.adoc
-
 :sectnums:
--v0.5
 
-Version 0.5
-August 1, 2022
+* Version 0.5
+* August 1, 2022
+* https://mlcommons.github.io/science/policy.adoc
 
 Points of contact:
 

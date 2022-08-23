@@ -15,7 +15,7 @@ documentation is located at the following links:
 
 The Policy document describing details of the submission is located at 
 
-* <https://github.com/mlcommons/science/blob/main/policy.adoc>
+* <https://mlcommons.github.io/science/policy.adoc>
 
 
 The submission window is anticipated to be open from Sep 30, 2022, to Mar 30, 2022.
