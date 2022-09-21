@@ -410,7 +410,7 @@ In this section we document the directory structure for submissions. We introduc
 
 `{system}` ::= Defines the system used for this benchmark
 
-`{descriptor}` ::= The descriptor of the experiment
+`{descriptor}` ::= The descriptor of the experiment, as described in the sientific_contribution. For example `experiment-1`, `faultzone-3`.
 
 `{n}` ::= number of repeated experiments
 
@@ -454,12 +454,10 @@ This includes
    contribution and the algorithms and associated hyperpaparmeters used in the 
    benchmark. 
 
-5. A README file 
-
-   A README.md file that describes how to run it. The README.md must have    
-   sufficient information to create such runs.
-
-   In some cases, a program may be used to run multiple experiments and create 
+5. A README file . A README.md file that describes how to run it. 
+   The README.md must have    
+   sufficient information to create such runs. In some cases, a program may be 
+   used to run multiple experiments and create 
    such a directory automatically. Enough information must be included in the
    directory, so such parameterized runs can be conducted, while also 
    replicating the appropriate directory structure. The reason we require for 
@@ -469,19 +467,21 @@ This includes
    the notebook with all its cells to be submitted along the `results.txt` 
    file.
 
-=== Oraganization Records in mandated Mllog entries
+6. Log File requirements. 
 
-Each benchmark will include a record with the Organizational record. This includes mllog entries for `POINT_IN_TIME` with the values 
+   1. The log file must have am Oraganization Records in Mllog entry format. This includes mllog entries for `POINT_IN_TIME` with the values 
 
-* submission_benchmark
-* submission_org
-* submission_division
-* submission_status
-* submission_platform
+      * submission_benchmark
+      * submission_org
+      * submission_division
+      * submission_status
+      * submission_platform
 
-Scientific Result
+   2. Scientific Result
 
-Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict describint the result. THe result must be documented in detail in the `sientific_contribution.pdf` file.
+Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict describint the result. 
+The result must be documented in detail in the `sientific_contribution.pdf` file.
+
 
 
 [bibliography]
