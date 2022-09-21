@@ -410,13 +410,13 @@ In this section we document the directory structure for submissions. We introduc
 
 `{system}` ::= Defines the system used for this benchmark
 
-`{descriptor}` ::= The descriptor of the experiment, as described in the sientific_contribution. For example `experiment-1`, `faultzone-3`.
+`{descriptor}` ::= A unique descriptor of the experiment, as described in the sientific_contribution. For example `experiment-1`, `faultzone-3`.
 
 `{n}` ::= number of repeated experiments
 
 All results are stored in a directory such as
 
-{organization}/{application}/{system}/{descriptor}/result-{n}
+{organization}/{application}/{system}/{descriptor}/result-{n}.txt
 
 Within this directory, all parameters for that experiment are stored, so that all information for the experiment are self-contained within the experiment.
 
@@ -426,7 +426,7 @@ This includes
    specified system to allow reproducibility.
 
 
-2. `result.txt` ::= The result logs for the `n`-th run with the parameters  
+2. `result-n.txt` ::= The result logs for the `n`-th run with the parameters  
    defined by `config.yaml`
 
 
@@ -477,14 +477,13 @@ This includes
       * submission_status
       * submission_platform
 
-   2. Scientific Result
-
-Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict describint the result. 
-The result must be documented in detail in the `sientific_contribution.pdf` file.
-
+   2. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict 
+      describing the result format and meaning.
+      The result must be documented in detail in the `sientific_contribution.pdf` file.
 
 
 [bibliography]
+
 == References
 
 We included here a list of supporting and related documents
