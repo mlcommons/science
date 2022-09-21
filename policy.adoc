@@ -422,28 +422,66 @@ Within this directory, all parameters for that experiment are stored, so that al
 
 This includes
 
-`result.txt` ::= The result logs for the `n`-th run with the parameters defined by `config.yaml`
+1. A number of scripts that are used to run the particular benchmark on the    
+   specified system to allow reproducibility.
 
-`config.yaml` ::= A configuration file that contains all hyperparameters and other parameters to define a run. This configuration file contains an entry that uniquely describes the version of the code that is run. The version must be included in the mlcommons benchmark repository
 
-```
-github:
-  repo:
-  branch:
-  version:
-  tag:
-```
+2. `result.txt` ::= The result logs for the `n`-th run with the parameters  
+   defined by `config.yaml`
 
-an additional README.md and sufficient information to create such runs need to be provided in the
 
-A number of scripts that are used to run the particular benchmark on the specified system to allow reproducibility.
 
-A README.md file that describes how to run it.
+3. `config.yaml` ::= A configuration file that contains all hyperparameters and 
+   other parameters to define a run. This configuration file contains an entry 
+   that uniquely describes the version of the code that is run. The version 
+   must be included in the mlcommons benchmark repository. This includes all 
+   hyperparameters including new ones particular to this approach.
 
-In some cases, a program may be used to run multiple experiments and create such a directory automatically. Enough information must be included in the
+   The configuration file should include enough deatials to replicate the    
+   experiment with locations to the program and the data. This can include 
+   github repositories specified in the form
 
-directory, so such parameterized runs can be conducted, while also replicating the appropriate directory structure. The reason we require for each result its own subdir is to allow output notebooks and comments to be submitted for each of the results if needed. This is especially the case when jupyter notebooks are used as the benchmark to be executed, allowing the notebook with all its cells to be submitted along the results.txt file.
+   ```
+   github:
+     discription: 
+     repo:
+     branch:
+     version:
+     tag:
+   ```
 
+4. `sientific_contribution.pdf` ::= A detailed description ofthe scientific 
+   contribution and the algorithms and associated hyperpaparmeters used in the 
+   benchmark. 
+
+5. A README file 
+
+   A README.md file that describes how to run it. The README.md must have    
+   sufficient information to create such runs.
+
+   In some cases, a program may be used to run multiple experiments and create 
+   such a directory automatically. Enough information must be included in the
+   directory, so such parameterized runs can be conducted, while also 
+   replicating the appropriate directory structure. The reason we require for 
+   each result its own subdir is to allow output notebooks and comments to be 
+   submitted for each of the results if needed. This is especially the case 
+   when jupyter notebooks are used as the benchmark to be executed, allowing 
+   the notebook with all its cells to be submitted along the `results.txt` 
+   file.
+
+=== Oraganization Records in mandated Mllog entries
+
+Each benchmark will include a record with the Organizational record. This includes mllog entries for `POINT_IN_TIME` with the values 
+
+* submission_benchmark
+* submission_org
+* submission_division
+* submission_status
+* submission_platform
+
+Scientific Result
+
+Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict describint the result. THe result must be documented in detail in the `sientific_contribution.pdf` file.
 
 
 [bibliography]
