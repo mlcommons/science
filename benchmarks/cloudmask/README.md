@@ -62,8 +62,8 @@ temperature is captured across three channels with the resolution of
 the STFC server by using these commands:
 
 ```bash
-$ aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/en/cloud_slstr_ds1/one-day
-$ aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/en/cloud_slstr_ds1/ssts
+$ aws s3 sync --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/en/cloud_slstr_ds1/one-day
+$ aws s3 sync --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/en/cloud_slstr_ds1/ssts
 ```
 
 ## Installation
