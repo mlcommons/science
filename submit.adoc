@@ -133,21 +133,27 @@ This includes
    file.
 
 6. Log File requirements.
-
+      
    1. The log file must have am Organization Records in Mllog entry format. This includes mllog entries for `POINT_IN_TIME` with the values
 
       * submission_benchmark
       * submission_org
       * submission_division
       * submissiom_version
+      * submission_github_commit_version
       * submission_status
       * submission_platform
       
-      The submission division such as closed and open must be elected in the "submission_division" filed. The benchmarks for the closed divisioon 
-      are defined by the codes cloudmahs, earthquake, stemdl, and uno contained in the science benchmark repository. The version in github 
-      used for the benchmark needs to be added to the submission log record. 
+   2. The submission division such as closed and open must be elected in the `submission_division` filed. The benchmarks for the closed divisioon 
+      are defined by the codes cloudmahs, earthquake, stemdl, and uno contained in the science benchmark repository. 
       
-   2. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict
+   3. The version in github VERSION.txt file
+      used for the benchmark needs to be added to the submission log record. The version is included in a VERSION.txt
+      file withon the benchamrk and is hardcoded in the program.
+      In addition the GitHub commit version needs to be added to the program. You can optain that version while
+      being in a code repository from the commandline with `git rev-parse HEAD`
+      
+   3. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict
       describing the result format and meaning.
       The result must be documented in detail in the `sientific_contribution.pdf` file.
 
