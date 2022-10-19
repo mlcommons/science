@@ -16,6 +16,18 @@ status: research
 platform: nvidia gtx-2
 accelerators_per_node: 16
 
+# Submission info
+submission:
+  benchmark: CloudMask
+  org: STFC
+  submiitter: TBD
+  submitter_email: TBD
+  division: SciML
+  version: 1.0
+  github_commit_version: 1.0
+  status: research
+  platform: nvidia gtx-2
+
 # Training data
 train_dir: ~/sciml_bench/datasets/cloud_slstr_ds1/one-day
 
