@@ -24,9 +24,9 @@ The following descriptions and code to scientific benchmarks are avialable at:
 * [Stemdl](https://github.com/mlcommons/science/tree/main/benchmarks/stemdl)
 * [Uno](https://github.com/mlcommons/science/tree/main/benchmarks/uno)
 
-## Deveopment versions 
+## Development versions 
 
-Development versions of the codes prior to upload to the mlcommons directory are avalable as follows:
+Development versions of the codes prior to upload to the mlcommons directory are available as follows:
 
 * [Science Policy Document](https://github.com/laszewsk/mlcommons/blob/main/www/content/en/docs/policy.adoc)
 * [Benchmarks](https://github.com/laszewsk/mlcommons/tree/main/benchmarks)
