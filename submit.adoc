@@ -139,9 +139,14 @@ This includes
       * submission_benchmark
       * submission_org
       * submission_division
+      * submissiom_version
       * submission_status
       * submission_platform
-
+      
+      The submission division such as closed and open must be elected in the "submission_division" filed. The benchmarks for the closed divisioon 
+      are defined by the codes cloudmahs, earthquake, stemdl, and uno contained in the science benchmark repository. The version in github 
+      used for the benchmark needs to be added to the submission log record. 
+      
    2. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict
       describing the result format and meaning.
       The result must be documented in detail in the `sientific_contribution.pdf` file.
