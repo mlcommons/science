@@ -1,6 +1,4 @@
-# STEMDL
-
-STEMDL (Classification)
+# STEMDL (Classification)
 
 State of the art scanning transmission electron microscopes (STEM)
 produce focused electron beams with atomic dimensions and allow to
@@ -69,3 +67,12 @@ The original implementation is available
 [here](https://github.com/at-aaims/stemdl-benchmark) with the original
 [instructions](https://github.com/at-aaims/stemdl-benchmark#quickstart). The
 Time-to-solution: 40min on 60 V100 GPUs
+
+## Suggestions for improvement
+We have explored common CNN models,  such as ResNet, VGG, DenseNet. ResNet 
+seems to perform slightly better, and deeper model performs slightly better. 
+Other model architectures are worth exploring e.g. vision transformer. The 
+most performance gain seems to come from feature engineering: e.g. the center 
+of the image has the largest value and it quickly decreases to the side. By 
+log-scaling the values, the accuracy improves by over 20%. Other feature 
+engineering techniques are worth exploring.  
