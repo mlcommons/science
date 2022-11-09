@@ -173,7 +173,7 @@ https://github.com/mlcommons/science/tree/result-dir/results[Github].
 You will need to create a fork, and commit within the fork your
 own results in the appropriate benchmark directories. Results for each
 benchmark are separated by closed and open directories for the closed
-and open divisions. Placeholder directories for various benchmarks are included in these directories. YOu will need to place your benchmark in
+and open divisions. Placeholder directories for various benchmarks are included in these directories. You will need to place your benchmark in
 the appropriate directory. Once committed to your fork, you can create
 a pull request which will then be reviewed.
 
