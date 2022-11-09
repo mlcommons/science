@@ -96,14 +96,20 @@ This includes
 2. `result-n.txt` ::= The result logs for the `n`-th run with the parameters
    defined by `config.yaml`
 
-3. `config.yaml` ::= A configuration file that contains all hyperparameters and
-   other parameters to define a run. This configuration file contains an entry
-   that uniquely describes the version of the code that is run. The version
-   must be included in the MLCommons benchmark repository. This also includes all
+3. `config.yaml` ::= A configuration file that contains all
+   hyperparameters and other parameters to define a run. This
+   configuration file contains an entry that uniquely describes the
+   version of the code that is run. The version must be included in
+   the MLCommons benchmark repository. This also includes all
    hyperparameters including new ones particular to this approach.
-   The configuration file should include enough details to replicate the
-   experiment with the locations of the program and the data. If the data does not fit in a GitHub repository it can be placed in a publicly accessible data store. Its location needs to be specified as an endpoint in the YAML file, with a command line example on how to retrieve it. As multiple files could be needed a list of commands can be specified.
-  Examples of the configuration format in the YAML file are:
+   The configuration file should include enough details to replicate
+   the experiment with the locations of the program and the data. If
+   the data does not fit in a GitHub repository it can be placed in a
+   publicly accessible data store. Its location needs to be specified
+   as an endpoint in the YAML file, with a command line example on how
+   to retrieve it. As multiple files could be needed a list of
+   commands can be specified.  Examples of the configuration format in
+   the YAML file are:
 
    github:
      discription: EarthQuake Prediction
@@ -115,26 +121,28 @@ This includes
   - aws s3 rsync ....
 
 
-4. `sientific_contribution.pdf` ::= A detailed description of the scientific
-   contribution and the algorithms and associated hyperparameters used in the
-   benchmark.
+4. `sientific_contribution.pdf` ::= A detailed description of the
+   scientific contribution and the algorithms and associated
+   hyperparameters used in the benchmark.
 
-5. A `README.md` file that describes how to run it.
-   The `README.md` must have
-   sufficient information to create such runs. In some cases, a program may be
-   used to run multiple experiments and create
-   such a directory automatically. Enough information must be included in the
-   directory, so such parameterized runs can be conducted, while also
-   replicating the appropriate directory structure. The reason we require for
-   each result its own subdirectory is to allow output notebooks and comments to be
-   submitted for each of the results if needed. This is especially the case
-   when jupyter notebooks are used as the benchmark to be executed, allowing
-   the notebook with all its cells to be submitted along the `results.txt`
+5. A `README.md` file that describes how to run it.  The `README.md`
+   must have sufficient information to create such runs. In some
+   cases, a program may be used to run multiple experiments and create
+   such a directory automatically. Enough information must be included
+   in the directory, so such parameterized runs can be conducted,
+   while also replicating the appropriate directory structure. The
+   reason we require for each result its own subdirectory is to allow
+   output notebooks and comments to be submitted for each of the
+   results if needed. This is especially the case when jupyter
+   notebooks are used as the benchmark to be executed, allowing the
+   notebook with all its cells to be submitted along the `results.txt`
    file.
 
 6. Log File requirements.
       
-   1. The log file must have am Organization Records in Mllog entry format. This includes mllog entries for `POINT_IN_TIME` with the values
+   1. The log file must have am Organization Records in Mllog entry
+      format. This includes mllog entries for `POINT_IN_TIME` with the
+      values
 
       * submission_benchmark
       * submission_org
@@ -156,6 +164,22 @@ This includes
    3. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict
       describing the result format and meaning.
       The result must be documented in detail in the `sientific_contribution.pdf` file.
+
+7. Uploading Results
+
+The results are presently managed in
+https://github.com/mlcommons/science/tree/result-dir/results[Github].
+
+You will need to create your own fork, and commit within the fork your
+own resluts in the appropriate benchmark directories. Results for each
+benchmark are seperated by closed and open directories for the closed
+and open divisions. Placehoder directories for various benchmarks are
+include in these directories. YOu will need to place you benchmark in
+te appropriate directory. Once committed to your fork, you can create
+a pull request which will yhen be reviewed.
+
+If you have issues with the submission or need help. Please contact the
+mlcommons science workging group in the https://drive.google.com/drive/u/0/folders/19FK3PXa9DVIe9j7FawwihCb47F0V_nlC[Google group].
 
 
 == References
