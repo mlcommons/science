@@ -1,7 +1,7 @@
 # Results Summary
 
 Here we will have tables for the results summaries of various benchmarks. To submit your results, please get in contact with 
-science@mlcommons.org. You will submit your log files to this e-mail and they will be integrated. IT is best to get in 
+science@mlcommons.org. You will submit your log files to this e-mail and they will be integrated. It is best to get in 
 contact with us prior to submitting your benchmarks.
 
 ## Cloudmask
