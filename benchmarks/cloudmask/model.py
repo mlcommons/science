@@ -15,7 +15,6 @@ from tensorflow.keras import layers
 
 
 def unet(input_shape: Tuple[int, int, int]) -> tf.keras.Model:
-
     input_layer = layers.Input(input_shape)
     x = input_layer
 

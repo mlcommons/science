@@ -52,7 +52,7 @@ class SLSTRDataLoader:
 
     @property
     def input_size(self):
-        return (self.patch_size, self.patch_size, self.n_channels)
+        return self.patch_size, self.patch_size, self.n_channels
 
     @property
     def output_size(self):
@@ -74,7 +74,7 @@ class SLSTRDataLoader:
         msk[msk == 0] = 0
         msk = msk.astype(np.float)
 
-        yield (img, msk, path.encode('utf-8'))
+        yield img, msk, path.encode('utf-8')
 
     def _preprocess_images(self, img, msk, path):
         # Crop & convert to patches

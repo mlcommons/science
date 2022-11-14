@@ -1,1 +1,1 @@
-mlcommons-cloudmask-v1.0
+mlcommons-cloudmask-v1.1

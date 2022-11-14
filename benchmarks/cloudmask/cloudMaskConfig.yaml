@@ -16,18 +16,6 @@ status: research
 platform: nvidia gtx-2
 accelerators_per_node: 16
 
-# Submission info
-submission:
-  benchmark: CloudMask
-  org: STFC
-  submiitter: TBD
-  submitter_email: TBD
-  division: SciML
-  version: 1.0
-  github_commit_version: 1.0
-  status: research
-  platform: nvidia gtx-2
-
 # Training data
 train_dir: ~/sciml_bench/datasets/cloud_slstr_ds1/one-day
 
@@ -44,7 +32,7 @@ output_dir : ~/sciml_bench/outputs/slstr_cloud
 log_file: ./cloudMask_Log
 
 # Log file for MLCommons logging
-mlperf_logfile: ./mlperf_stemdl.log
+mlperf_logfile: ./mlperf_cloudmask.log
 
 # Size of each patch to feed to the network
 PATCH_SIZE: 256
@@ -82,7 +70,6 @@ no_cache: False
 nodes: 1
 
 gpu: 1
-
 
 
 
