@@ -26,14 +26,21 @@ All other requirements are the same as discussed in the General Submission Rules
 The following goals are to be captured by the submission process
 
 * Submissions can be made to the MLCommons® Science GitHub at any time for any benchmark that has been released.
-* Submissions will be automatically checked and then reviewed by the working group which has a review committee for each benchmark.
+* Submissions will be checked and then reviewed by the working group which has a review committee for each benchmark.
 * Depending on the number of scientific innovations in the submission, the review time will vary.
-* The submitters will get an automatic acknowledgment of the submission and a customized response from the committee within a week of the submittal date.
+* The submitters will get an acknowledgment of the submission and a customized response from the committee within a week of the submittal date.
 * This second response will indicate the estimated time for a committee review to be completed.
 * On completion of the committee review, all submissions that are considered in scope will be posted on the working group GitHub which includes a scientific discovery "leaderboard" for each benchmark.
     Updates will be summarized quarterly
 * The innovations will be described and can include aspects other than final accuracy
     e.g. the submission might need a smaller dataset to achieve an interesting accuracy. It is expected that benchmarks will be posted for at least a year to gather a rich set of input.
+
+## Submission and Result Repositories
+
+* <https://github.com/mlcommons/submissions_science/>: A private repository in which the science WG members are maintainers and coordinate the submission for the result. To upload by non working group membere you need to contact the WG through the {Public Google Groups](https://groups.google.com/a/mlcommons.org/g/public) mailing list.
+
+* <https://github.com/mlcommons/science_results/> The public repository in which we post the results.
+
 
 ## Timeline of Deployment
 
