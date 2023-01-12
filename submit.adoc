@@ -37,9 +37,9 @@ The following goals are to be captured by the submission process
 
 ## Submission and Result Repositories
 
-* <https://github.com/mlcommons/submissions_science>: A private repository in which the science WG members are maintainers and coordinate the submission for the result. To upload by non working group membere you need to contact the WG through the [Mlcommons Science Google Group](https://groups.google.com/a/mlcommons.org/g/science) mailing list.
+* https://github.com/mlcommons/submissions_science : A private repository in which the science WG members are maintainers and coordinate the submission for the result. To upload by non working group membere you need to contact the WG through the [Mlcommons Science Google Group](https://groups.google.com/a/mlcommons.org/g/science) mailing list.
 
-* <https://github.com/mlcommons/science_results/> The public repository in which we post the results.
+* https://github.com/mlcommons/science_results : The public repository in which we post the results.
 
 
 ## Timeline of Deployment
