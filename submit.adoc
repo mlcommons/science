@@ -159,14 +159,18 @@ This includes
       * submission_status
       * submission_platform
       
-   2. The submission division such as closed and open must be elected in the `submission_division` filed. The benchmarks for the closed divisioon 
-      are defined by the codes cloudmahs, earthquake, stemdl, and uno contained in the science benchmark repository. 
+   2. The submission division for science is open and must be elected
+      in the `submission_division` filed. Currently we have a number
+      of benchmarks defined by the codes for cloudmask, earthquake,
+      stemdl, and uno contained in the science benchmark repository.
       
-   3. The version in github VERSION.txt file
-      used for the benchmark needs to be added to the submission log record. The version is included in a VERSION.txt
-      file withon the benchamrk and is hardcoded in the program.
-      In addition the GitHub commit version needs to be added to the program. You can optain that version while
-      being in a code repository from the commandline with `git rev-parse HEAD`
+   3. The version in github VERSION.txt file used for the benchmark
+      needs to be added to the submission log record. The version is
+      included in a VERSION.txt file withon the benchamrk and is
+      hardcoded in the program.  In addition the GitHub commit version
+      needs to be added to the program. You can optain that version
+      while being in a code repository from the commandline with `git
+      rev-parse HEAD`
       
    3. Scientific Result. Each benchmark must have an mllog entry  POINT_IN_TIME with the key "result" and the value of a dict
       describing the result format and meaning.
@@ -177,12 +181,12 @@ This includes
 The results are presently managed in
 https://github.com/mlcommons/science/tree/result-dir/results[Github].
 
-You will need to create a fork, and commit within the fork your
-own results in the appropriate benchmark directories. Results for each
-benchmark are separated by closed and open directories for the closed
-and open divisions. Placeholder directories for various benchmarks are included in these directories. You will need to place your benchmark in
-the appropriate directory. Once committed to your fork, you can create
-a pull request which will then be reviewed.
+You will need to create a fork, and commit within the fork your own
+results in the appropriate benchmark directories. Results for each
+benchmark are for open division only. Placeholder directories for
+various benchmarks are included in these directories. You will need to
+place your benchmark in the appropriate directory. Once committed to
+your fork, you can create a pull request which will then be reviewed.
 
 If you have issues with the submission or need help. Please contact the
 mlcommons science working group via the https://drive.google.com/drive/u/0/folders/19FK3PXa9DVIe9j7FawwihCb47F0V_nlC[Google group].
