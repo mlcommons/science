@@ -8,7 +8,7 @@
 :sectnums:
 
 * Version 0.5
-* August 1, 2022
+* April 3, 2023
 * https://github.com/mlcommons/science/blob/main/policy.adoc
 
 Points of contact:
@@ -39,17 +39,17 @@ temperature behavior.
 The Science WG will use training as the primary benchmark. Here we
 specify the rules for training submissions.
 
-The Science WG will have Closed and Open divisions and submissions to
-these divisions must be separate although the same activity could
-qualify for both. The Open division is expected to be the primary
-focus.
+The Science WG will have an Open divisions and submissions to
+the divisions must be indicated as "open".
 
-A Closed division submission should report system performance as the
+The  division submission should focus on improving the accuracy of a benchmark.
+The stopping criterion will be the value of loss specified in
+the benchmark. The benchmark can also include
+ system performance as an additional
 result and give the logging information outlined in MLPerf HPC
-Rules. The stopping criterion will be the value of loss specified in
-the benchmark. Power and temperature measurements may also be supplied.
+Rules. Power and temperature measurements may also be supplied.
 
-An Open division submission aims to improve scientific discovery from
+The Open division submission aims to improve scientific discovery from
 the dataset specified in the benchmark which will specify one or more
 scientific measurements to be calculated in the submission. The result
 will be the value of these specified measurements from the submitted
@@ -65,7 +65,8 @@ document. The resulting document should give enough details on the
 submitted model and any data augmentation so that the review team can
 evaluate its scientific soundness. Citations should be included to
 describe the scientific basis of the approach. Other rules for the
-Open division are as described in MLCommons® Training Rules, however, there are no special rules for the Open Science division.
+Open division are as described in MLCommons® Training Rules, however,
+there are no special rules for the Open Science division.
 
 To showcase the various aspects of the benchmarks and contrast it to
 with existing training benchmarks from MLCommons® at the time of writing
@@ -80,8 +81,6 @@ Table 1: Targeted aspects of the MLCommons® Science benchmark.
 
 |===
 | Division | Hardware System | Training data | Model | Test data / method | Primary Metric | Secondary Metrics (optional)
-| *Non Science Training Closed* | *Anything* | *Fixed* | *Fixed* | *Fixed* | *Speed* | *None*
-| Science Closed | Anything | Fixed | Variable | Fixed | "Science Quality", Accuracy | Time, memory, power
 | Science Open | Anything | Variable | Variable | Fixed | "Science Quality", Accuracy, Optional user-defined metric | Time, memory, power
 |===
 
@@ -121,34 +120,7 @@ table.
 
 == Divisions
 
-There are two divisions of the Science Benchmark Suite, the Closed
-division and the Open division.
-
-
-=== Closed Division
-
-The Closed division requires using the same preprocessing, model, and
-training method as the reference implementation.
-
-The closed division models are:
-
-|===
-|Problem | Repository
-|EarthQuake  | https://github.com/mlcommons/science/
-|CloudMask | https://github.com/mlcommons/science/
-|STEMDL  | https://github.com/mlcommons/science/
-|CANDLE UNO  | https://github.com/mlcommons/science/
-|===
-
-Allowed hyperparameter and optimizer settings are specified in the
-section *Hyperparameters and Optimizer*. For anything not explicitly
-mentioned there, submissions must match the behavior and settings of
-the reference implementations.
-
-In order to simplify the complex setup for scientific benchmarks,
-we recommend that all parameters are included in the config file when available.
-We recommend a YAML format for the config file.
-
+The Science benchmarks are all considered to be part of an Open division.
 
 === Open Division
 
@@ -177,6 +149,29 @@ comparative measures to evaluate the scientific accuracy. The measure(s) should 
 
 Algorithms that are not open source do not qualify for the science benchmarks as reproducibility and reviews are limited.
 
+The Open division allows to use different preprocessing, model, and
+training method as the reference implementation.
+
+Our current collation of benchmarks for the open division includes
+
+
+|===
+|Problem | Repository
+|EarthQuake  | https://github.com/mlcommons/science/
+|CloudMask | https://github.com/mlcommons/science/
+|STEMDL  | https://github.com/mlcommons/science/
+|CANDLE UNO  | https://github.com/mlcommons/science/
+|===
+
+Current hyperparameter and optimizer settings are specified in the
+section *Hyperparameters and Optimizer*. For anything not explicitly
+mentioned there, submissions must match the behavior and settings of
+the reference implementations.
+
+In order to simplify the complex setup for scientific benchmarks,
+we recommend that all parameters are included in the config file when available.
+We recommend a YAML format for the config file.
+
 
 == Data Set
 
@@ -201,9 +196,15 @@ https://github.com/mlcommons/training_policies/blob/master/training_rules.adoc#6
 State at Start of Run] on consistency with the reference
 implementation preprocessing and allowance for reformatting.
 
+It is to be pointed out that the data set itself could be a parameter as part
+of increasing accuracy in the Open Division. For example including additional
+data may improve the outcome of the benchmark.
+
+
 === Default Data Sets
 
-For the closed division, we have a number of defined data sets that can
+For the open division, we have a number of defined data sets for each benchmark
+that can
 be used for obtaining scientific results. This allows us an easier
 review.
 
@@ -319,8 +320,6 @@ the runs take a long time (between 5 - 12h on NVidia GPUs).
 |CANDLE UNO | 5 | 5 | >=5
 |===
 
-For the closed division, we will have one or more sample submission results.
-
 // Their links are listed in the following table
 //
 // |===
@@ -333,7 +332,8 @@ For the closed division, we will have one or more sample submission results.
 //
 // In case of repeated logs, they are placed into a directory.
 
-The results are tared and submitted through the https://github.com/mlcommons/policies/blob/master/submission_rules.adoc[MLCommons®
+The results are tared and submitted through the
+https://github.com/mlcommons/policies/blob/master/submission_rules.adoc[MLCommons®
 submission process].
 
 == Identifying Information
