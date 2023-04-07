@@ -21,8 +21,8 @@ Points of contact:
 
 == Disclaimer
 
-The MLPerf and https://mlcommons.org[MLCommons®] name and logo are
-trademarks. In order to refer to a result using the MLPerf and
+The MLPerf™ and https://mlcommons.org[MLCommons®] name and logo are
+trademarks. In order to refer to a result using the MLPerf™ and
 MLCommons® name, the result must conform to the letter and spirit of
 the rules specified in this document. The MLCommons® organization
 reserves the right to solely determine if a use of its name or logo is
