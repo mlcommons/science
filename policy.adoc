@@ -81,7 +81,7 @@ Table 1: Targeted aspects of the MLCommons® Science benchmark.
 
 |===
 | Division | Hardware System | Training data | Model | Test data / method | Primary Metric | Secondary Metrics (optional)
-| Science Open | Anything | Variable | Variable | Fixed | "Science Quality", Accuracy, Optional user-defined metric | Time, memory, power
+| Science Open | Anything | Variable | Variable | Fixed | "Science Quality", Accuracy, Optional user-defined metrics | Time, memory, power
 |===
 
 The secondary metrics include
@@ -283,42 +283,16 @@ Each application has its own hyperparameters and optimizer configurations. They 
 
 == Run Results
 
-MLCommon® Science Benchmark Suite submissions consist of the following
-three metrics: metrics 1 is considered mandatory for a complete
-submission whereas metrics 2 and 3 are considered optional.
-
-=== Strong Scaling (Time to Convergence)
-
-This is a *mandatory* metric (see MLPerf Training
-https://github.com/mlcommons/training_policies/blob/master/training_rules.adoc#section-run-results[Run Results]).
-The same rules apply here.
-
-=== Weak Scaling (Throughput)
-
-At this time we are not considering weak scaling.
+MLCommons® Science Benchmark Suite is focused on the accuracy of benchmarks. 
+Other benchmark metrics can also be submitted, provided that all metrics 
+are sufficiently described to support reproducibility.
+Submitted results should be announced in the https://mlcommons-science.github.io/[MLCommons Science Blog].
 
 == Benchmark Results
 
-We follow MLPerf Training Benchmark Results rule along with the
-following required number of runs per benchmark.  Note that since
-run-to-run variability is already captured by spatial multiplexing in
-case of metric 3, we use the adjusted requirement that the number of
-trained instances have to be at least equal to the number of runs for
-metric 1 and 2.
-
-The numbers given below reflect the minimum number of repetitive runs
-required to produce repeatable metrics.  In the case of the Earthquake
-benchmark, we have reduced the number of runs to 1 for metric 1, as
-the runs take a long time (between 5 - 12h on NVidia GPUs).
-
-|===
-| |Number of Runs |Number of Runs |Number of Runs
-|Benchmark | Metric 1 |  Metric 2 | Metric 3
-|Earthquake | 1 | 5 | >=5
-|CloudMask | 10 | 10 | >=10
-|STEMDL Classification | 5 | 5 | >=5
-|CANDLE UNO | 5 | 5 | >=5
-|===
+It is sufficient to submit a single benchmark result is but must be documented how it 
+was achieved. For example, if the result is the best of N runs,
+this must be clearly documented in the submission. 
 
 // Their links are listed in the following table
 //
