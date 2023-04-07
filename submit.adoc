@@ -44,7 +44,7 @@ The following goals are to be captured by the submission process
 
 ## Timeline of Deployment
 
-The submission process will be in place for release at SC22, Dallas November 16.
+The submission is open and can be performed at any time.
 
 == Logging Libraries
 
