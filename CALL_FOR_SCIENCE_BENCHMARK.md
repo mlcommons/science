@@ -18,8 +18,7 @@ The Policy document describing details of the submission is located at
 * <https://github.com/mlcommons/science/blob/main/policy.adoc>
 
 
-The submission window is anticipated to be open from Sep 30, 2022, to Mar 30, 2022.
-Initial submissions will be reviewed for SC22 November 13-18 2022
+The submission window is anticipated to be open starting from May 10, 2023.
 
 If you have questions, please direct them to: gcf@mlcommons.org
 
