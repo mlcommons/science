@@ -20,7 +20,7 @@ The Policy document is located at
 The following descriptions and code to scientific benchmarks are available at:
 
 * [Cloudmask](https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/README.md)
-* [Earthqauke](https://github.com/mlcommons/science/blob/main/benchmarks/earthquake/README.md)
+* [Earthquake](https://github.com/mlcommons/science/blob/main/benchmarks/earthquake/README.md)
 * [Stemdl](https://github.com/mlcommons/science/tree/main/benchmarks/stemdl)
 * [Uno](https://github.com/mlcommons/science/tree/main/benchmarks/uno)
 
