@@ -9,7 +9,7 @@ The benchmarks include at present 4 distinct benchmarks. Their description and
 documentation is located at the following links:
 
 * [Cloudmask](https://github.com/mlcommons/science/blob/main/benchmarks/cloudmask/README.md)
-* [Earthqauke](https://github.com/mlcommons/science/blob/main/benchmarks/earthquake/README.md)
+* [Earthquake](https://github.com/mlcommons/science/blob/main/benchmarks/earthquake/README.md)
 * [Stemdl](https://github.com/mlcommons/science/tree/main/benchmarks/stemdl)
 * [Uno](https://github.com/mlcommons/science/tree/main/benchmarks/uno)
 
