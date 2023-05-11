@@ -18,7 +18,7 @@ The Policy document describing details of the submission is located at
 * <https://github.com/mlcommons/science/blob/main/policy.adoc>
 
 
-The submission window is anticipated to be open starting from May 10, 2023.
+Rolling submissions are now open as described in the overall [policy](https://github.com/mlcommons/science/blob/main/policy.adoc) and [submissions](https://github.com/mlcommons/science/blob/main/submit.adoc) documents.
 
 If you have questions, please direct them to: gcf@mlcommons.org
 
