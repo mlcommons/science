@@ -126,10 +126,23 @@ the STFC server by using these commands:
 mkdir -p data/ssts
 mkdir -p data/one-day
 pip install awscli
+
+```
+The new repo used to be in  
+
+```bash
+aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/inference ./data/inference
+aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/training ./data/training
+```
+
+The old repo (may not be available) and used to be in 
+
+```
 aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/one-day ./data/one-day
 aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/ssts ./data/ssts
 ```
 
+Note that the new repo may not be working with the current code and the directory locations may need to be updated.
 
 ## Running the benchmark
 
