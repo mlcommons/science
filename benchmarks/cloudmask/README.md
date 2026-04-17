@@ -113,21 +113,20 @@ cd science/benchmarks/cloudmask
    
 ## Data
 
-The dataset is about 180GB and made up of two parts: reflectance and
+The dataset is made up of two parts: reflectance and
 brightness temperature. The reflectance is captured across six
 channels with the resolution of 2400 x 3000 pixels, and the brightness
 temperature is captured across three channels with the resolution of
-1200 x 1500 pixels. The training files are in the "one-day" folder
-(163GB) and the files used for inferencing are in "ssts" folder
-(17GB), see `cloudMaskConfig.yaml`.The datasets can be downloaded from
+1200 x 1500 pixels. The total size of training files is
+163GB and the size of inferencing is 17GB, see `cloudMaskConfig.yaml`.The datasets can be downloaded from
 the STFC server by using these commands:
 
 ```bash
 mkdir -p data/ssts
 mkdir -p data/one-day
 pip install awscli
-aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/one-day ./data/one-day
-aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/ssts ./data/ssts
+aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/inference ./data/inference
+aws s3 --no-sign-request --endpoint-url https://s3.echo.stfc.ac.uk sync s3://sciml-datasets/es/cloud_slstr_ds1/training ./data/training
 ```
 
 
